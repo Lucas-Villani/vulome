@@ -1,0 +1,26 @@
+{
+  "nombre": "Distribuidor",
+  "categoria": "Barista",
+  "precio": 29999,
+  "medidas": [
+    {
+      "medida": "51 mm",
+      "precio": 29999
+    },
+    {
+      "medida": "58 mm",
+      "precio": 29999
+    }
+  ],
+  "descripcion": "Distribuidor de café, ideal para nivelar el café molido dentro del portafiltro antes del prensado. Su uso ayuda a lograr una superficie más pareja, favoreciendo una extracción más uniforme y una preparación más prolija.\n\nEs una herramienta práctica y fácil de usar, pensada para mejorar la consistencia del espresso tanto en casa como en cafeterías o espacios baristas.",
+  "imagenes": [
+    "/images/productos/1-13.png",
+    "/images/productos/2-13.png",
+    "/images/productos/3-14.png",
+    "/images/productos/4-15.png",
+    "/images/productos/5-14.png",
+    "/images/productos/6-14.png",
+    "/images/productos/7-10.png"
+  ],
+  "destacado": false
+}
