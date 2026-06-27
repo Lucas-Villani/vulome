@@ -1,8 +1,26 @@
 {
-  "nombre": "Tetera de Hierro Fundido Tetsubin 600ml",
+  "nombre": "Tetera Tradicional con Infusor",
   "categoria": "Teteras",
-  "precio": 48500,
-  "descripcion": "Tetera japonesa de hierro fundido con esmaltado interior. Mantiene el calor por más tiempo.",
-  "imagenes": [],
+  "precio": 16999,
+  "medidas": [
+    {
+      "medida": "800 ml",
+      "precio": 16999
+    },
+    {
+      "medida": "600 ml",
+      "precio": 12499
+    }
+  ],
+  "descripcion": "Tetera de vidrio borosilicato con infusor de acero inoxidable 304, ideal para preparar té e infusiones de manera práctica y elegante. Su diseño transparente permite ver el color de la bebida durante la preparación, mientras que el infusor removible facilita el uso y la limpieza.\n\nEl vidrio borosilicato ofrece mayor resistencia térmica que un vidrio común, y el acero inoxidable 304 es un material duradero, seguro y apto para contacto con alimentos. Perfecta para uso diario en casa, oficina o reuniones.",
+  "imagenes": [
+    "/images/productos/1-2.png",
+    "/images/productos/2-2.png",
+    "/images/productos/3-2.png",
+    "/images/productos/4-2.png",
+    "/images/productos/5-2.png",
+    "/images/productos/6-2.png",
+    "/images/productos/7-2.png"
+  ],
   "destacado": false
 }
