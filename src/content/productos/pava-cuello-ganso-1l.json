@@ -1,8 +1,17 @@
 {
-  "nombre": "Pava Cuello de Ganso 1L",
+  "nombre": "Knockbox",
   "categoria": "Barista",
-  "precio": 39900,
-  "descripcion": "Pico de precisión para pour over. Control total del caudal de agua.",
-  "imagenes": [],
-  "destacado": true
+  "precio": 22999,
+  "descripcion": "Knockbox para café, ideal para descartar el café usado del portafiltro de forma práctica, rápida y prolija. Su diseño permite golpear cómodamente el portafiltro sobre la barra central, ayudando a mantener limpia la zona de preparación.\n\nEs un accesorio resistente, fácil de vaciar y de limpiar, perfecto para uso diario en casa, cafeterías o espacios baristas.",
+  "imagenes": [
+    "/images/productos/1-12.png",
+    "/images/productos/2-12.png",
+    "/images/productos/3-13.png",
+    "/images/productos/4-14.png",
+    "/images/productos/5-13.png",
+    "/images/productos/6-13.png",
+    "/images/productos/7-9.png",
+    "/images/productos/8-3.png"
+  ],
+  "destacado": false
 }
