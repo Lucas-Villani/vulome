@@ -87,7 +87,10 @@ content:
         label: Descripción del sitio
         type: text
       - name: whatsapp
-        label: WhatsApp (formato internacional, ej 5491164214326)
+        label: WhatsApp (formato internacional, ej 5491122334455)
+        type: string
+      - name: instagram
+        label: Usuario de Instagram (sin la @)
         type: string
       - name: email
         label: Email de contacto
