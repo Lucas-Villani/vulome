@@ -1,8 +1,29 @@
 {
-  "nombre": "Jarro Térmico Acero Inoxidable 500ml",
+  "nombre": "Vaso Doble Vidrio",
   "categoria": "Vasos y Tazas",
-  "precio": 21900,
-  "descripcion": "Acero inoxidable con aislamiento al vacío. Mantiene frío y calor por horas.",
-  "imagenes": [],
+  "precio": 4499,
+  "medidas": [
+    {
+      "medida": "250 ml",
+      "precio": 4499
+    },
+    {
+      "medida": "150 ml",
+      "precio": 3499
+    },
+    {
+      "medida": "80 ml",
+      "precio": 2999
+    }
+  ],
+  "descripcion": "Vaso de doble vidrio, ideal para disfrutar café, té, infusiones o bebidas frías con una presentación elegante y moderna. Su diseño de doble pared ayuda a conservar mejor la temperatura y permite tomar la bebida con mayor comodidad.\n\nEl vidrio transparente realza el color y la textura de la preparación, aportando un estilo delicado y sofisticado para el uso diario o para servir en ocasiones especiales.",
+  "imagenes": [
+    "/images/productos/2-3.png",
+    "/images/productos/3-3.png",
+    "/images/productos/4-3.png",
+    "/images/productos/5-3.png",
+    "/images/productos/6-3.png",
+    "/images/productos/7-3.png"
+  ],
   "destacado": false
 }
