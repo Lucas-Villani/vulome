@@ -1,8 +1,16 @@
 {
-  "nombre": "Balanza Digital de Café 0.1g",
+  "nombre": "Tamping Mat",
   "categoria": "Barista",
-  "precio": 28900,
-  "descripcion": "Precisión de 0.1g con timer integrado. Esencial para recetas de café de especialidad.",
-  "imagenes": [],
+  "precio": 11999,
+  "descripcion": "Tamping mat de silicona antideslizante, ideal para apoyar el portafiltro y prensar el café de forma cómoda, firme y prolija. Su diseño ayuda a proteger la mesada y brinda mayor estabilidad durante el tamping.\n\nEs práctica, resistente y fácil de limpiar, una herramienta esencial para preparar espresso en casa, cafeterías o espacios baristas.",
+  "imagenes": [
+    "/images/productos/1-10.png",
+    "/images/productos/2-10.png",
+    "/images/productos/3-11.png",
+    "/images/productos/4-12.png",
+    "/images/productos/5-11.png",
+    "/images/productos/6-11.png",
+    "/images/productos/7-7.png"
+  ],
   "destacado": false
 }
