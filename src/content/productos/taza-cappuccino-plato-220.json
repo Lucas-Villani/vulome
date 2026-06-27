@@ -1,8 +1,22 @@
 {
-  "nombre": "Taza para Cappuccino con Plato 220ml",
+  "nombre": "Vaso de Oso Doble Vidrio",
   "categoria": "Vasos y Tazas",
-  "precio": 11500,
-  "descripcion": "Set de taza y plato de cerámica, medida ideal para cappuccino y flat white.",
-  "imagenes": [],
+  "precio": 5999,
+  "medidas": [
+    {
+      "medida": "250 ml",
+      "precio": 5999
+    }
+  ],
+  "descripcion": "Vaso de doble vidrio con forma de oso, ideal para disfrutar café, té, leche, jugos o bebidas frías con una presentación original y delicada. Su diseño de doble pared ayuda a conservar mejor la temperatura y permite apreciar la bebida con un efecto visual moderno y atractivo.\n\nLa forma de oso le da un estilo tierno y decorativo, perfecto para uso diario, regalar o sumar un detalle especial a la mesa.",
+  "imagenes": [
+    "/images/productos/3-4.png",
+    "/images/productos/4-5.png",
+    "/images/productos/5-5.png",
+    "/images/productos/6-5.png",
+    "/images/productos/7-5.png",
+    "/images/productos/8-1.png",
+    "/images/productos/9-1.png"
+  ],
   "destacado": false
 }
