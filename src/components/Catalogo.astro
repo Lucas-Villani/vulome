@@ -1,0 +1,159 @@
+---
+import ProductoCard from "./ProductoCard.astro";
+
+const { productos, categorias } = Astro.props;
+---
+
+<section id="catalogo" class="catalogo section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Catálogo</h2>
+      <p>{productos.length} productos disponibles</p>
+    </div>
+
+    <div class="controles">
+      <div class="filtros" role="tablist" aria-label="Filtrar por categoría">
+        <button class="filtro is-active" data-filtro="Todos" type="button">Todos</button>
+        {categorias.map((c) => (
+          <button class="filtro" data-filtro={c.nombre} type="button">{c.nombre}</button>
+        ))}
+      </div>
+      <label class="search">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path>
+        </svg>
+        <input type="search" id="buscador" placeholder="Buscar productos..." autocomplete="off" />
+      </label>
+    </div>
+
+    <div class="grid-productos" id="grid">
+      {productos.map((p) => <ProductoCard producto={p} />)}
+    </div>
+
+    <p class="empty" id="empty" hidden>No encontramos productos con esos criterios.</p>
+  </div>
+</section>
+
+<style>
+  .controles {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .filtros {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .filtro {
+    padding: 0.55rem 1.1rem;
+    border-radius: 100px;
+    border: 1px solid var(--line);
+    background: transparent;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .filtro:hover {
+    background: var(--surface);
+  }
+  .filtro.is-active {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: var(--accent);
+  }
+  .search {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    color: var(--ink-soft);
+    transition: border-color 0.2s, color 0.2s;
+    min-width: 240px;
+  }
+  .search:focus-within {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .search input {
+    border: none;
+    outline: none;
+    background: none;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  .empty {
+    text-align: center;
+    color: var(--ink-soft);
+    padding: 3rem 0;
+  }
+  .card.is-hidden {
+    display: none;
+  }
+  @media (max-width: 720px) {
+    .controles {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .search {
+      min-width: 0;
+    }
+    .filtros {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      padding-bottom: 0.3rem;
+      -webkit-overflow-scrolling: touch;
+    }
+    .filtro {
+      flex: 0 0 auto;
+    }
+  }
+</style>
+
+<script>
+  const grid = document.getElementById("grid");
+  if (grid) {
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>(".card"));
+    const filtros = Array.from(document.querySelectorAll<HTMLButtonElement>(".filtro"));
+    const buscador = document.getElementById("buscador") as HTMLInputElement | null;
+    const empty = document.getElementById("empty");
+    let categoriaActiva = "Todos";
+
+    function aplicar() {
+      const q = (buscador?.value || "").trim().toLowerCase();
+      let visibles = 0;
+      cards.forEach((card) => {
+        const cat = card.getAttribute("data-categoria");
+        const nombre = card.getAttribute("data-nombre") || "";
+        const matchCat = categoriaActiva === "Todos" || cat === categoriaActiva;
+        const matchQ = !q || nombre.includes(q);
+        const mostrar = matchCat && matchQ;
+        card.classList.toggle("is-hidden", !mostrar);
+        if (mostrar) visibles++;
+      });
+      if (empty) empty.hidden = visibles !== 0;
+    }
+
+    filtros.forEach((btn) =>
+      btn.addEventListener("click", () => {
+        filtros.forEach((b) => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        categoriaActiva = btn.getAttribute("data-filtro") || "Todos";
+        aplicar();
+      })
+    );
+    buscador?.addEventListener("input", aplicar);
+
+    // Filtro inicial desde la URL: /?cat=Barista
+    const cat = new URLSearchParams(location.search).get("cat");
+    if (cat) {
+      const btn = filtros.find((b) => b.getAttribute("data-filtro") === cat);
+      if (btn) btn.click();
+    }
+  }
+</script>

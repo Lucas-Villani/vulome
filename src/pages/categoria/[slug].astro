@@ -1,0 +1,71 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ProductoCard from "../../components/ProductoCard.astro";
+import categorias from "../../data/categorias.json";
+import productos from "../../data/productos.json";
+
+export function getStaticPaths() {
+  return categorias.map((c) => ({
+    params: { slug: c.slug },
+    props: {
+      categoria: c,
+      items: productos.filter((p) => p.categoria === c.nombre),
+    },
+  }));
+}
+
+const { categoria, items } = Astro.props;
+---
+
+<Layout title={`${categoria.nombre} — VULOME`} description={categoria.descripcion}>
+  <section class="section cat-page">
+    <div class="container">
+      <nav class="crumbs">
+        <a href="/">Inicio</a><span>/</span><span class="current">{categoria.nombre}</span>
+      </nav>
+      <h1>{categoria.nombre}</h1>
+      <p class="lead">{categoria.descripcion}</p>
+
+      {items.length > 0 ? (
+        <div class="grid-productos">
+          {items.map((p) => <ProductoCard producto={p} />)}
+        </div>
+      ) : (
+        <p class="empty">Pronto vamos a cargar productos en esta categoría.</p>
+      )}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .crumbs {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin-bottom: 1.5rem;
+  }
+  .crumbs a:hover {
+    color: var(--ink);
+  }
+  .crumbs .current {
+    color: var(--ink);
+  }
+  .cat-page h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+  }
+  .lead {
+    margin-top: 0.8rem;
+    margin-bottom: 2.5rem;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 50ch;
+  }
+  .empty {
+    color: var(--ink-soft);
+    padding: 3rem 0;
+  }
+</style>

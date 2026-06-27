@@ -1,0 +1,155 @@
+[
+  {
+    "id": "tetera-vidrio-infusor-800",
+    "nombre": "Tetera de Vidrio con Infusor 800ml",
+    "categoria": "Teteras",
+    "precio": 22900,
+    "descripcion": "Vidrio de borosilicato resistente al calor con infusor de acero inoxidable extraíble.",
+    "imagen": "",
+    "destacado": true
+  },
+  {
+    "id": "tetera-hierro-tetsubin-600",
+    "nombre": "Tetera de Hierro Fundido Tetsubin 600ml",
+    "categoria": "Teteras",
+    "precio": 48500,
+    "descripcion": "Tetera japonesa de hierro fundido con esmaltado interior. Mantiene el calor por más tiempo.",
+    "imagen": "",
+    "destacado": false
+  },
+  {
+    "id": "tetera-ceramica-esmaltada-1l",
+    "nombre": "Tetera de Cerámica Esmaltada 1L",
+    "categoria": "Teteras",
+    "precio": 19900,
+    "descripcion": "Cerámica esmaltada con tapa y asa ergonómica. Ideal para servir en la mesa.",
+    "imagen": "",
+    "destacado": false
+  },
+  {
+    "id": "taza-ceramica-mug-350",
+    "nombre": "Taza de Cerámica Mug 350ml",
+    "categoria": "Vasos y Tazas",
+    "precio": 8900,
+    "descripcion": "Mug de cerámica de gres con terminación mate. Apta para microondas y lavavajillas.",
+    "imagen": "",
+    "destacado": true
+  },
+  {
+    "id": "set-vasos-doble-pared-250",
+    "nombre": "Set x2 Vasos de Vidrio Doble Pared 250ml",
+    "categoria": "Vasos y Tazas",
+    "precio": 15900,
+    "descripcion": "Vidrio de doble pared que mantiene la temperatura y no quema las manos.",
+    "imagen": "",
+    "destacado": false
+  },
+  {
+    "id": "jarro-termico-acero-500",
+    "nombre": "Jarro Térmico Acero Inoxidable 500ml",
+    "categoria": "Vasos y Tazas",
+    "precio": 21900,
+    "descripcion": "Acero inoxidable con aislamiento al vacío. Mantiene frío y calor por horas.",
+    "imagen": "",
+    "destacado": false
+  },
+  {
+    "id": "taza-cappuccino-plato-220",
+    "nombre": "Taza para Cappuccino con Plato 220ml",
+    "categoria": "Vasos y Tazas",
+    "precio": 11500,
+    "descripcion": "Set de taza y plato de cerámica, medida ideal para cappuccino y flat white.",
+    "imagen": "",
+    "destacado": false
+  },
+  {
+    "id": "pava-cuello-ganso-1l",
+    "nombre": "Pava Cuello de Ganso 1L",
+    "categoria": "Barista",
+    "precio": 39900,
+    "descripcion": "Pico de precisión para pour over. Control total del caudal de agua.",
+    "imagen": "",
+    "destacado": true
+  },
+  {
+    "id": "tamper-acero-51",
+    "nombre": "Tamper de Acero Inoxidable 51mm",
+    "categoria": "Barista",
+    "precio": 17900,
+    "descripcion": "Base plana de acero inoxidable con mango de madera. Compactado parejo del café.",
+    "imagen": "",
+    "destacado": false
+  },
+  {
+    "id": "jarra-lechera-latte-350",
+    "nombre": "Jarra Lechera para Latte Art 350ml",
+    "categoria": "Barista",
+    "precio": 13900,
+    "descripcion": "Acero inoxidable con pico afilado para latte art. Capacidad 350ml.",
+    "imagen": "",
+    "destacado": false
+  },
+  {
+    "id": "balanza-cafe-01g",
+    "nombre": "Balanza Digital de Café 0.1g",
+    "categoria": "Barista",
+    "precio": 28900,
+    "descripcion": "Precisión de 0.1g con timer integrado. Esencial para recetas de café de especialidad.",
+    "imagen": "",
+    "destacado": false
+  },
+  {
+    "id": "infusor-acero-malla-fina",
+    "nombre": "Infusor de Acero Inoxidable Malla Fina",
+    "categoria": "Infusores",
+    "precio": 4900,
+    "descripcion": "Malla fina que retiene hasta las hebras más pequeñas. Con tapa y cadena.",
+    "imagen": "",
+    "destacado": false
+  },
+  {
+    "id": "filtro-permanente-pour-over",
+    "nombre": "Filtro Permanente Pour Over",
+    "categoria": "Infusores",
+    "precio": 9900,
+    "descripcion": "Filtro reutilizable de acero inoxidable. Sin papel, sostenible y económico.",
+    "imagen": "",
+    "destacado": false
+  },
+  {
+    "id": "infusor-silicona",
+    "nombre": "Infusor de Silicona",
+    "categoria": "Infusores",
+    "precio": 3500,
+    "descripcion": "Silicona apta para alimentos, flexible y fácil de limpiar. Varios usos.",
+    "imagen": "",
+    "destacado": false
+  },
+  {
+    "id": "kit-prensa-francesa-600",
+    "nombre": "Kit Prensa Francesa 600ml + Café",
+    "categoria": "Kits de Barismo",
+    "precio": 34900,
+    "descripcion": "Prensa francesa de vidrio con marco de acero más 250g de café de especialidad.",
+    "imagen": "",
+    "destacado": true
+  },
+  {
+    "id": "kit-pour-over-v60",
+    "nombre": "Kit Pour Over V60 Completo",
+    "categoria": "Kits de Barismo",
+    "precio": 42900,
+    "descripcion": "Dripper V60, jarra graduada, filtros y cuchara medidora. Todo para empezar.",
+    "imagen": "",
+    "destacado": false
+  },
+  {
+    "id": "kit-inicio-barista",
+    "nombre": "Kit Inicio Barista",
+    "categoria": "Kits de Barismo",
+    "precio": 38900,
+    "descripcion": "Jarra lechera, tamper y cuchara dosificadora. El set ideal para arrancar en casa.",
+    "imagen": "",
+    "destacado": false
+  }
+]

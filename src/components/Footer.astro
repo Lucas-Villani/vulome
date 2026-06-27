@@ -1,0 +1,100 @@
+---
+import sitio from "../data/sitio.json";
+import categorias from "../data/categorias.json";
+import { linkWhatsapp } from "../lib/utils";
+
+const anio = new Date().getFullYear();
+const wa = linkWhatsapp(sitio.whatsapp, `¡Hola ${sitio.nombre}! Quería hacer una consulta 😊`);
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <span class="logo">{sitio.nombre}</span>
+      <p>{sitio.descripcion}</p>
+    </div>
+    <div class="footer-col">
+      <h4>Categorías</h4>
+      <ul>
+        {categorias.map((c) => (
+          <li><a href={`/categoria/${c.slug}`}>{c.nombre}</a></li>
+        ))}
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href={wa} target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href={`mailto:${sitio.email}`}>Email</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© {anio} {sitio.nombre}. Todos los derechos reservados.</span>
+    <span>Escribinos por WhatsApp para comprar o consultar.</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+    margin-top: 4rem;
+    padding-block: clamp(2.5rem, 5vw, 4rem) 1.5rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+  .footer-brand .logo {
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    font-size: 1.1rem;
+  }
+  .footer-brand p {
+    margin-top: 0.8rem;
+    max-width: 38ch;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+  }
+  .footer-col h4 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .footer-col a {
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover {
+    color: var(--ink-soft);
+  }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    color: var(--ink-faint);
+    font-size: 0.8rem;
+  }
+  @media (max-width: 720px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

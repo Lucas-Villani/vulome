@@ -1,0 +1,82 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Catalogo from "../components/Catalogo.astro";
+import CategoriaCard from "../components/CategoriaCard.astro";
+import IconoWhatsapp from "../components/IconoWhatsapp.astro";
+import { linkWhatsapp } from "../lib/utils";
+import sitio from "../data/sitio.json";
+import categorias from "../data/categorias.json";
+import productos from "../data/productos.json";
+
+const wa = linkWhatsapp(sitio.whatsapp, `¡Hola ${sitio.nombre}! Quería hacer una consulta 😊`);
+---
+
+<Layout>
+  <section class="hero">
+    <div class="container hero-inner">
+      <p class="eyebrow">{sitio.tagline}</p>
+      <h1>Objetos simples para tu cocina y tu café.</h1>
+      <p class="hero-sub">
+        Seleccionamos teteras, tazas y herramientas de barismo con diseño. Mirá el catálogo
+        y escribinos por WhatsApp para comprar o consultar.
+      </p>
+      <div class="hero-cta">
+        <a href="#catalogo" class="btn-primary">Ver catálogo</a>
+        <a href={wa} target="_blank" rel="noopener" class="btn-ghost">
+          <IconoWhatsapp size={17} />
+          Consultar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section categorias">
+    <div class="container">
+      <div class="section-head">
+        <h2>Categorías</h2>
+        <p>Explorá por tipo de producto</p>
+      </div>
+      <div class="cat-grid">
+        {categorias.map((c) => <CategoriaCard categoria={c} />)}
+      </div>
+    </div>
+  </section>
+
+  <Catalogo productos={productos} categorias={categorias} />
+</Layout>
+
+<style>
+  .hero {
+    padding-block: clamp(3.5rem, 9vw, 7rem);
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-inner {
+    max-width: 760px;
+  }
+  .hero h1 {
+    margin-top: 1rem;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+  }
+  .hero-sub {
+    margin-top: 1.4rem;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--ink-soft);
+    max-width: 52ch;
+  }
+  .hero-cta {
+    margin-top: 2.2rem;
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+  .hero-cta .btn-ghost {
+    align-items: center;
+  }
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: clamp(1rem, 2vw, 1.6rem);
+  }
+</style>

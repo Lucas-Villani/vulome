@@ -1,0 +1,44 @@
+---
+import sitio from "../data/sitio.json";
+import { linkWhatsapp } from "../lib/utils";
+import IconoWhatsapp from "./IconoWhatsapp.astro";
+
+const wa = linkWhatsapp(sitio.whatsapp, "¡Hola VULOME! Quería hacer una consulta 😊");
+---
+
+<a class="wa-float" href={wa} target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+  <IconoWhatsapp size={24} />
+  <span class="wa-float-text">WhatsApp</span>
+</a>
+
+<style>
+  .wa-float {
+    position: fixed;
+    right: clamp(1rem, 3vw, 2rem);
+    bottom: clamp(1rem, 3vw, 2rem);
+    z-index: 60;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    background: #25d366;
+    color: #ffffff;
+    padding: 0.85rem 1.2rem;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    transition: transform 0.25s var(--ease), box-shadow 0.25s;
+  }
+  .wa-float:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+  }
+  @media (max-width: 600px) {
+    .wa-float-text {
+      display: none;
+    }
+    .wa-float {
+      padding: 0.95rem;
+    }
+  }
+</style>

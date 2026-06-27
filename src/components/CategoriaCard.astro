@@ -1,0 +1,72 @@
+---
+interface Categoria {
+  nombre: string;
+  slug: string;
+  descripcion: string;
+}
+
+const { categoria } = Astro.props as { categoria: Categoria };
+---
+
+<a class="cat-card" href={`/categoria/${categoria.slug}`}>
+  <div class="cat-card-top">
+    <span class="cat-card-inicial" aria-hidden="true">{categoria.nombre.charAt(0)}</span>
+  </div>
+  <div class="cat-card-body">
+    <h3>{categoria.nombre}</h3>
+    <p>{categoria.descripcion}</p>
+    <span class="arrow">Ver productos →</span>
+  </div>
+</a>
+
+<style>
+  .cat-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), background 0.3s,
+      border-color 0.3s;
+    min-height: 220px;
+  }
+  .cat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    background: var(--bg);
+    border-color: var(--line);
+  }
+  .cat-card-top {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    min-height: 90px;
+  }
+  .cat-card-inicial {
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--ink-faint);
+  }
+  .cat-card-body {
+    padding: 1.2rem 1.3rem 1.4rem;
+  }
+  .cat-card-body h3 {
+    font-size: 1.15rem;
+  }
+  .cat-card-body p {
+    margin-top: 0.35rem;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+  .arrow {
+    display: inline-block;
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: transform 0.25s var(--ease);
+  }
+  .cat-card:hover .arrow {
+    transform: translateX(4px);
+  }
+</style>
