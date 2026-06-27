@@ -1,0 +1,23 @@
+{
+  "nombre": "Cafetera Doble Vidrio",
+  "categoria": "Barista",
+  "precio": 27999,
+  "medidas": [
+    {
+      "medida": "1 L",
+      "precio": 27999
+    }
+  ],
+  "descripcion": "Cafetera prensa francesa de doble vidrio de 1 litro, ideal para preparar café de forma práctica, elegante y con cuerpo. Su sistema de émbolo permite infusionar el café molido y filtrarlo fácilmente, logrando una preparación intensa y aromática.\n\nEl diseño de doble vidrio aporta una presentación moderna y ayuda a conservar mejor la temperatura de la bebida. Es una opción práctica y sofisticada para usar en casa, oficina, cafeterías o espacios baristas.",
+  "imagenes": [
+    "/images/productos/1-19.png",
+    "/images/productos/2-19.png",
+    "/images/productos/3-20.png",
+    "/images/productos/4-21.png",
+    "/images/productos/5-20.png",
+    "/images/productos/6-20.png",
+    "/images/productos/7-15.png",
+    "/images/productos/8-5.png"
+  ],
+  "destacado": false
+}
