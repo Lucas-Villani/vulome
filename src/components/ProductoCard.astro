@@ -1,7 +1,5 @@
 ---
-import { formatearPrecio, linkWhatsapp } from "../lib/utils";
-import IconoWhatsapp from "./IconoWhatsapp.astro";
-import sitio from "../data/sitio.json";
+import { formatearPrecio } from "../lib/utils";
 import type { Producto } from "../lib/productos";
 
 const { producto } = Astro.props as { producto: Producto };
@@ -10,18 +8,15 @@ const foto = producto.imagenes[0] ?? "";
 const medidas = (producto.medidas ?? []).filter((m) => m && m.medida && m.precio);
 const tieneMedidas = medidas.length > 0;
 const url = `/producto/${producto.slug}`;
-const wa = linkWhatsapp(
-  sitio.whatsapp,
-  `¡Hola ${sitio.nombre}! Me interesa este producto: ${producto.nombre}. ¿Está disponible?`
-);
 ---
 
-<article
+<a
   class="card"
+  href={url}
   data-categoria={producto.categoria}
   data-nombre={producto.nombre.toLowerCase()}
 >
-  <a class="thumb" href={url} aria-label={producto.nombre}>
+  <div class="thumb">
     {foto ? (
       <img src={foto} alt={producto.nombre} loading="lazy" />
     ) : (
@@ -30,10 +25,10 @@ const wa = linkWhatsapp(
     {producto.imagenes.length > 1 && (
       <span class="badge-fotos">{producto.imagenes.length} fotos</span>
     )}
-  </a>
+  </div>
   <div class="info">
     <span class="cat">{producto.categoria}</span>
-    <a class="nombre-link" href={url}><h3 class="nombre">{producto.nombre}</h3></a>
+    <h3 class="nombre">{producto.nombre}</h3>
     <p class="desc">{producto.descripcion}</p>
 
     {tieneMedidas ? (
@@ -51,12 +46,9 @@ const wa = linkWhatsapp(
       </div>
     )}
 
-    <a class="btn-comprar" href={wa} target="_blank" rel="noopener">
-      <IconoWhatsapp size={17} />
-      Consultar por WhatsApp
-    </a>
+    <span class="ver">Ver producto →</span>
   </div>
-</article>
+</a>
 
 <style>
   .card {
@@ -121,17 +113,10 @@ const wa = linkWhatsapp(
     letter-spacing: 0.12em;
     color: var(--ink-faint);
   }
-  .nombre-link {
-    text-decoration: none;
-  }
   .nombre {
     font-size: 0.98rem;
     font-weight: 600;
     line-height: 1.25;
-    transition: color 0.2s;
-  }
-  .nombre-link:hover .nombre {
-    color: var(--ink-soft);
   }
   .desc {
     font-size: 0.83rem;
@@ -174,23 +159,17 @@ const wa = linkWhatsapp(
     font-weight: 600;
     letter-spacing: -0.01em;
   }
-  .btn-comprar {
+  .ver {
     margin-top: 0.9rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.45rem;
-    text-align: center;
-    background: var(--accent);
-    color: var(--accent-ink);
-    padding: 0.7rem 1rem;
-    border-radius: 100px;
     font-size: 0.85rem;
     font-weight: 500;
-    transition: opacity 0.2s, transform 0.2s;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: gap 0.2s var(--ease);
   }
-  .btn-comprar:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
+  .card:hover .ver {
+    gap: 0.6rem;
   }
 </style>

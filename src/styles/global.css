@@ -139,6 +139,12 @@ h4 {
   gap: clamp(1rem, 2vw, 1.6rem);
 }
 
+/* El filtro y el buscador del catálogo ocultan tarjetas con esta clase.
+   Debe ser global (no scoped) para alcanzar las .card de ProductoCard. */
+.card.is-hidden {
+  display: none !important;
+}
+
 /* ===== Accesibilidad ===== */
 :focus-visible {
   outline: 2px solid var(--ink);
