@@ -1,0 +1,16 @@
+{
+  "nombre": "Portacapsulas Nespresso Negro",
+  "categoria": "Barista",
+  "precio": 27999,
+  "descripcion": "Portacápsulas para Nespresso, ideal para organizar y tener siempre a mano tus cápsulas de café de forma práctica y prolija. Su diseño permite mantener la mesada ordenada, optimizar el espacio y acceder fácilmente a cada cápsula al momento de preparar el café.\n\nEs una opción funcional y decorativa para usar en casa, oficinas, cafeterías o espacios de café, aportando orden y estilo a la rutina diaria.",
+  "imagenes": [
+    "/images/productos/1-17.png",
+    "/images/productos/2-17.png",
+    "/images/productos/3-18.png",
+    "/images/productos/4-19.png",
+    "/images/productos/5-18.png",
+    "/images/productos/6-18.png",
+    "/images/productos/7-13.png"
+  ],
+  "destacado": false
+}
