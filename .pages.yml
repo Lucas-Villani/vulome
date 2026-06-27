@@ -44,9 +44,10 @@ content:
         label: Descripción
         type: text
       - name: imagenes
-        label: Fotos del producto (podés subir varias y ordenarlas)
+        label: Fotos del producto (subí varias de una y ordenalas arrastrando)
         type: image
-        list: true
+        options:
+          multiple: true
       - name: destacado
         label: Destacado (resaltar el producto)
         type: boolean
