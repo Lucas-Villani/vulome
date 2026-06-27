@@ -2,27 +2,14 @@
 import { formatearPrecio, linkWhatsapp } from "../lib/utils";
 import IconoWhatsapp from "./IconoWhatsapp.astro";
 import sitio from "../data/sitio.json";
-
-interface Medida {
-  medida: string;
-  precio: number;
-}
-interface Producto {
-  id: string;
-  nombre: string;
-  categoria: string;
-  precio: number;
-  descripcion: string;
-  imagen: string;
-  destacado?: boolean;
-  medidas?: Medida[];
-}
+import type { Producto } from "../lib/productos";
 
 const { producto } = Astro.props as { producto: Producto };
 const inicial = producto.nombre.charAt(0).toUpperCase();
+const foto = producto.imagenes[0] ?? "";
 const medidas = (producto.medidas ?? []).filter((m) => m && m.medida && m.precio);
 const tieneMedidas = medidas.length > 0;
-
+const url = `/producto/${producto.slug}`;
 const wa = linkWhatsapp(
   sitio.whatsapp,
   `¡Hola ${sitio.nombre}! Me interesa este producto: ${producto.nombre}. ¿Está disponible?`
@@ -34,16 +21,19 @@ const wa = linkWhatsapp(
   data-categoria={producto.categoria}
   data-nombre={producto.nombre.toLowerCase()}
 >
-  <div class="thumb">
-    {producto.imagen ? (
-      <img src={producto.imagen} alt={producto.nombre} loading="lazy" />
+  <a class="thumb" href={url} aria-label={producto.nombre}>
+    {foto ? (
+      <img src={foto} alt={producto.nombre} loading="lazy" />
     ) : (
       <span class="thumb-ph" aria-hidden="true">{inicial}</span>
     )}
-  </div>
+    {producto.imagenes.length > 1 && (
+      <span class="badge-fotos">{producto.imagenes.length} fotos</span>
+    )}
+  </a>
   <div class="info">
     <span class="cat">{producto.categoria}</span>
-    <h3 class="nombre">{producto.nombre}</h3>
+    <a class="nombre-link" href={url}><h3 class="nombre">{producto.nombre}</h3></a>
     <p class="desc">{producto.descripcion}</p>
 
     {tieneMedidas ? (
@@ -85,22 +75,38 @@ const wa = linkWhatsapp(
   }
   .thumb {
     position: relative;
-    aspect-ratio: 1 / 1;
-    background: var(--surface);
     display: grid;
     place-items: center;
+    aspect-ratio: 1 / 1;
+    background: var(--surface);
     overflow: hidden;
   }
   .thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.4s var(--ease);
+  }
+  .card:hover .thumb img {
+    transform: scale(1.04);
   }
   .thumb-ph {
     font-size: 3.5rem;
     font-weight: 600;
     color: var(--ink-faint);
     letter-spacing: -0.03em;
+  }
+  .badge-fotos {
+    position: absolute;
+    bottom: 0.6rem;
+    right: 0.6rem;
+    background: rgba(17, 17, 16, 0.78);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.2rem 0.55rem;
+    border-radius: 100px;
+    backdrop-filter: blur(4px);
   }
   .info {
     display: flex;
@@ -115,10 +121,17 @@ const wa = linkWhatsapp(
     letter-spacing: 0.12em;
     color: var(--ink-faint);
   }
+  .nombre-link {
+    text-decoration: none;
+  }
   .nombre {
     font-size: 0.98rem;
     font-weight: 600;
     line-height: 1.25;
+    transition: color 0.2s;
+  }
+  .nombre-link:hover .nombre {
+    color: var(--ink-soft);
   }
   .desc {
     font-size: 0.83rem;
