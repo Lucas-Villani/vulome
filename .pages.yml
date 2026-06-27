@@ -1,0 +1,63 @@
+# Configuración del panel visual Pages CMS — https://pagescms.org
+media:
+  input: public/images/productos
+  output: /images/productos
+
+content:
+  - name: productos
+    label: Productos
+    type: collection
+    path: src/content/productos
+    filename: '{fields.nombre}.json'
+    view:
+      fields:
+        - nombre
+        - categoria
+        - precio
+    fields:
+      - name: nombre
+        label: Nombre del producto
+        type: string
+      - name: categoria
+        label: Categoría
+        type: select
+        options:
+          values:
+            - Teteras
+            - Vasos y Tazas
+            - Barista
+            - Infusores
+            - Kits de Barismo
+      - name: precio
+        label: Precio (en pesos, sin puntos ni símbolos)
+        type: number
+      - name: descripcion
+        label: Descripción
+        type: text
+      - name: imagen
+        label: Foto del producto
+        type: image
+      - name: destacado
+        label: Destacado (resaltar el producto)
+        type: boolean
+
+  - name: sitio
+    label: Configuración del sitio
+    type: file
+    path: src/data/sitio.json
+    fields:
+      - name: nombre
+        label: Nombre del sitio
+        type: string
+      - name: tagline
+        label: Tagline (subtítulo)
+        type: string
+      - name: descripcion
+        label: Descripción del sitio
+        type: text
+      - name: whatsapp
+        label: WhatsApp (formato internacional, ej 5491164214326)
+        type: string
+      - name: email
+        label: Email de contacto
+        type: string

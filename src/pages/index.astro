@@ -4,9 +4,9 @@ import Catalogo from "../components/Catalogo.astro";
 import CategoriaCard from "../components/CategoriaCard.astro";
 import IconoWhatsapp from "../components/IconoWhatsapp.astro";
 import { linkWhatsapp } from "../lib/utils";
+import { productos } from "../lib/productos";
 import sitio from "../data/sitio.json";
 import categorias from "../data/categorias.json";
-import productos from "../data/productos.json";
 
 const wa = linkWhatsapp(sitio.whatsapp, `¡Hola ${sitio.nombre}! Quería hacer una consulta 😊`);
 ---
