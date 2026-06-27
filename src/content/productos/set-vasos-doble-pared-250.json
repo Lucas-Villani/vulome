@@ -1,8 +1,22 @@
 {
-  "nombre": "Set x2 Vasos de Vidrio Doble Pared 250ml",
+  "nombre": "Taza Doble Vidrio",
   "categoria": "Vasos y Tazas",
-  "precio": 15900,
-  "descripcion": "Vidrio de doble pared que mantiene la temperatura y no quema las manos.",
-  "imagenes": [],
+  "precio": 5999,
+  "medidas": [
+    {
+      "medida": "200 ml",
+      "precio": 5999
+    }
+  ],
+  "descripcion": "Taza de doble vidrio, ideal para disfrutar café, té, cappuccino, infusiones o bebidas frías con una presentación elegante y moderna. Su diseño de doble pared ayuda a conservar mejor la temperatura de la bebida y permite sostenerla con mayor comodidad.\n\nEl vidrio transparente realza la preparación y aporta un estilo delicado, práctico y sofisticado para el uso diario en casa, oficina o cafetería.",
+  "imagenes": [
+    "/images/productos/1-3.png",
+    "/images/productos/4-4.png",
+    "/images/productos/5-4.png",
+    "/images/productos/6-4.png",
+    "/images/productos/7-4.png",
+    "/images/productos/8.png",
+    "/images/productos/9.png"
+  ],
   "destacado": false
 }
