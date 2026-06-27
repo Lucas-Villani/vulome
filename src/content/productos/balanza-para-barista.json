@@ -1,0 +1,15 @@
+{
+  "nombre": "Balanza para Barista",
+  "categoria": "Barista",
+  "precio": 29999,
+  "descripcion": "Balanza para barista, ideal para medir con precisión la cantidad de café y agua en cada preparación. Su uso ayuda a lograr recetas más consistentes, controlar mejor las proporciones y mejorar el resultado final en métodos como espresso, prensa francesa, V60 o café filtrado.\n\nEs práctica, fácil de usar y una herramienta esencial para quienes buscan preparar café de forma más precisa y profesional, tanto en casa como en cafeterías o espacios baristas. (Incluye pilas)",
+  "imagenes": [
+    "/images/productos/1-15.png",
+    "/images/productos/2-15.png",
+    "/images/productos/3-16.png",
+    "/images/productos/4-17.png",
+    "/images/productos/5-16.png",
+    "/images/productos/6-16.png"
+  ],
+  "destacado": false
+}
