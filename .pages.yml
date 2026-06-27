@@ -20,14 +20,12 @@ content:
         type: string
       - name: categoria
         label: Categoría
-        type: select
+        type: reference
         options:
-          values:
-            - Teteras
-            - Vasos y Tazas
-            - Barista
-            - Infusores
-            - Kits de Barismo
+          collection: categorias
+          value: '{nombre}'
+          label: '{nombre}'
+          search: nombre
       - name: precio
         label: Precio (si es de un solo tamaño; sin puntos ni símbolos)
         type: number
@@ -52,6 +50,26 @@ content:
       - name: destacado
         label: Destacado (resaltar el producto)
         type: boolean
+
+  - name: categorias
+    label: Categorías
+    type: collection
+    path: src/content/categorias
+    filename: '{fields.nombre}.json'
+    view:
+      fields:
+        - nombre
+        - orden
+    fields:
+      - name: nombre
+        label: Nombre de la categoría
+        type: string
+      - name: descripcion
+        label: Descripción (texto corto que aparece en la tarjeta de la categoría)
+        type: text
+      - name: orden
+        label: Orden (número; el menor aparece primero en el menú)
+        type: number
 
   - name: sitio
     label: Configuración del sitio
