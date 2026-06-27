@@ -4,12 +4,12 @@
   "precio": 11999,
   "descripcion": "Saquitos de té descartables con cierre por hilo, ideales para preparar té en hebras, hierbas, blends e infusiones de forma práctica y limpia. Su diseño permite cargar el contenido fácilmente y cerrarlo sin necesidad de accesorios adicionales.\n\nSon una opción cómoda para uso diario en casa, cafeterías, oficina o para armar preparaciones individuales listas para infusionar.",
   "imagenes": [
-    "/images/productos/1-4.png",
-    "/images/productos/2-4.png",
-    "/images/productos/3-5.png",
-    "/images/productos/4-6.png",
-    "/images/productos/5-6.png",
-    "/images/productos/6-6.png"
+    "/images/productos/1-4.webp",
+    "/images/productos/2-4.webp",
+    "/images/productos/3-5.webp",
+    "/images/productos/4-6.webp",
+    "/images/productos/5-6.webp",
+    "/images/productos/6-6.webp"
   ],
   "destacado": false
 }

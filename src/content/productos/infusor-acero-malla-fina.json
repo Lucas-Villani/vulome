@@ -4,12 +4,12 @@
   "precio": 9999,
   "descripcion": "Saquitos de té descartables con cierre termosellable, ideales para preparar té en hebras, hierbas, blends e infusiones de forma práctica, limpia y prolija. Su diseño permite cargar el contenido y sellarlo fácilmente para armar porciones individuales listas para usar.\n\nSon una excelente opción para uso diario, cafeterías, emprendimientos o para organizar infusiones personalizadas con una presentación cómoda y profesional.",
   "imagenes": [
-    "/images/productos/1-5.png",
-    "/images/productos/2-5.png",
-    "/images/productos/3-6.png",
-    "/images/productos/4-7.png",
-    "/images/productos/6-7.png",
-    "/images/productos/7-6.png"
+    "/images/productos/1-5.webp",
+    "/images/productos/2-5.webp",
+    "/images/productos/3-6.webp",
+    "/images/productos/4-7.webp",
+    "/images/productos/6-7.webp",
+    "/images/productos/7-6.webp"
   ],
   "destacado": false
 }
