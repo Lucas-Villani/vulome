@@ -1,8 +1,18 @@
 {
-  "nombre": "Tetera de Vidrio con Infusor 800ml",
+  "nombre": "Tetera de Vidrio con Infusor",
   "categoria": "Teteras",
-  "precio": 22900,
-  "descripcion": "Vidrio de borosilicato resistente al calor con infusor de acero inoxidable extraíble.",
+  "precio": 18900,
+  "medidas": [
+    {
+      "medida": "600 ml",
+      "precio": 18900
+    },
+    {
+      "medida": "800 ml",
+      "precio": 22900
+    }
+  ],
+  "descripcion": "Vidrio de borosilicato resistente al calor con infusor de acero inoxidable extraíble. Disponible en dos tamaños.",
   "imagen": "",
   "destacado": true
 }

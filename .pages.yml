@@ -29,8 +29,19 @@ content:
             - Infusores
             - Kits de Barismo
       - name: precio
-        label: Precio (en pesos, sin puntos ni símbolos)
+        label: Precio (si es de un solo tamaño; sin puntos ni símbolos)
         type: number
+      - name: medidas
+        label: Medidas / variantes (opcional — dejar vacío si es de un solo tamaño)
+        type: object
+        list: true
+        fields:
+          - name: medida
+            label: Medida (ej. 600 ml)
+            type: string
+          - name: precio
+            label: Precio de esta medida
+            type: number
       - name: descripcion
         label: Descripción
         type: text

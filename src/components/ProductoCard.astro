@@ -3,6 +3,10 @@ import { formatearPrecio, linkWhatsapp } from "../lib/utils";
 import IconoWhatsapp from "./IconoWhatsapp.astro";
 import sitio from "../data/sitio.json";
 
+interface Medida {
+  medida: string;
+  precio: number;
+}
 interface Producto {
   id: string;
   nombre: string;
@@ -11,13 +15,17 @@ interface Producto {
   descripcion: string;
   imagen: string;
   destacado?: boolean;
+  medidas?: Medida[];
 }
 
 const { producto } = Astro.props as { producto: Producto };
 const inicial = producto.nombre.charAt(0).toUpperCase();
+const medidas = (producto.medidas ?? []).filter((m) => m && m.medida && m.precio);
+const tieneMedidas = medidas.length > 0;
+
 const wa = linkWhatsapp(
   sitio.whatsapp,
-  `¡Hola ${sitio.nombre}! Me interesa este producto: ${producto.nombre} (${formatearPrecio(producto.precio)}). ¿Está disponible?`
+  `¡Hola ${sitio.nombre}! Me interesa este producto: ${producto.nombre}. ¿Está disponible?`
 );
 ---
 
@@ -37,9 +45,22 @@ const wa = linkWhatsapp(
     <span class="cat">{producto.categoria}</span>
     <h3 class="nombre">{producto.nombre}</h3>
     <p class="desc">{producto.descripcion}</p>
-    <div class="bottom">
-      <span class="precio">{formatearPrecio(producto.precio)}</span>
-    </div>
+
+    {tieneMedidas ? (
+      <div class="medidas">
+        {medidas.map((m) => (
+          <div class="medida-row">
+            <span class="medida-nombre">{m.medida}</span>
+            <span class="medida-precio">{formatearPrecio(m.precio)}</span>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="bottom">
+        <span class="precio">{formatearPrecio(producto.precio)}</span>
+      </div>
+    )}
+
     <a class="btn-comprar" href={wa} target="_blank" rel="noopener">
       <IconoWhatsapp size={17} />
       Consultar por WhatsApp
@@ -114,6 +135,29 @@ const wa = linkWhatsapp(
   }
   .precio {
     font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .medidas {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+    padding: 0.6rem 0.75rem;
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+  }
+  .medida-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+  }
+  .medida-nombre {
+    color: var(--ink-soft);
+  }
+  .medida-precio {
     font-weight: 600;
     letter-spacing: -0.01em;
   }

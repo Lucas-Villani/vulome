@@ -3,6 +3,11 @@
 
 const modules = import.meta.glob("../content/productos/*.json", { eager: true });
 
+export interface Medida {
+  medida: string;
+  precio: number;
+}
+
 export interface Producto {
   id: string;
   nombre: string;
@@ -11,6 +16,7 @@ export interface Producto {
   descripcion: string;
   imagen: string;
   destacado: boolean;
+  medidas: Medida[];
 }
 
 export const productos: Producto[] = Object.entries(modules)
@@ -21,10 +27,13 @@ export const productos: Producto[] = Object.entries(modules)
       id,
       nombre: data.nombre,
       categoria: data.categoria,
-      precio: data.precio,
+      precio: data.precio ?? 0,
       descripcion: data.descripcion,
       imagen: data.imagen ?? "",
       destacado: data.destacado ?? false,
+      medidas: Array.isArray(data.medidas)
+        ? data.medidas.filter((m: any) => m && m.medida)
+        : [],
     };
   })
   .sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
