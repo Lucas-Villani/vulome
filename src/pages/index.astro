@@ -55,7 +55,7 @@ const cats = categorias.map((c, i) => ({
     </div>
     <div class="cat-lista">
       {cats.map((c) => (
-        <a class="cat-row" href={`/categoria/${c.slug}`}>
+        <a class="cat-row" href="#catalogo" data-cat={c.nombre}>
           <span class="cat-row-left">
             <span class="cat-num">{c.num}</span>
             <span class="cat-nombre">{c.nombre}</span>

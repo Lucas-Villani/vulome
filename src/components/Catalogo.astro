@@ -163,6 +163,16 @@ const { productos, categorias } = Astro.props;
     );
     buscador?.addEventListener("input", aplicar);
 
+    // Las filas de categoría de la home activan el filtro correspondiente
+    // (y el enlace #catalogo hace el scroll hasta acá).
+    document.querySelectorAll(".cat-row").forEach((row) => {
+      row.addEventListener("click", () => {
+        const c = row.getAttribute("data-cat");
+        const btn = filtros.find((b) => b.getAttribute("data-filtro") === c);
+        if (btn) btn.click();
+      });
+    });
+
     const cat = new URLSearchParams(location.search).get("cat");
     if (cat) {
       const btn = filtros.find((b) => b.getAttribute("data-filtro") === cat);
