@@ -19,6 +19,8 @@ export interface Producto {
   descripcion: string;
   imagenes: string[];
   destacado: boolean;
+  material: string;
+  incluye: string;
   medidas: Medida[];
 }
 
@@ -40,6 +42,8 @@ export const productos: Producto[] = Object.entries(modules)
       descripcion: data.descripcion,
       imagenes,
       destacado: data.destacado ?? false,
+      material: data.material ?? "",
+      incluye: data.incluye ?? "",
       medidas: Array.isArray(data.medidas)
         ? data.medidas.filter((m: any) => m && m.medida)
         : [],

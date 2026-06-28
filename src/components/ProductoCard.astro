@@ -8,9 +8,16 @@ const foto = producto.imagenes[0] ?? "";
 const medidas = (producto.medidas ?? []).filter((m) => m && m.medida && m.precio);
 const tieneMedidas = medidas.length > 0;
 const url = `/producto/${producto.slug}`;
-const precioLabel = tieneMedidas
-  ? `desde ${formatearPrecio(Math.min(...medidas.map((m) => m.precio)))}`
-  : formatearPrecio(producto.precio);
+
+let precioLabel: string;
+if (tieneMedidas) {
+  const precios = medidas.map((m) => m.precio);
+  const min = Math.min(...precios);
+  const max = Math.max(...precios);
+  precioLabel = min === max ? formatearPrecio(min) : `${formatearPrecio(min)} – ${formatearPrecio(max)}`;
+} else {
+  precioLabel = formatearPrecio(producto.precio);
+}
 ---
 
 <a
@@ -30,14 +37,16 @@ const precioLabel = tieneMedidas
     )}
   </div>
   <div class="info">
-    <span class="cat">{producto.categoria}</span>
-    <h3 class="nombre">{producto.nombre}</h3>
-    <p class="nota">{producto.descripcion}</p>
-    {tieneMedidas && (
-      <div class="chips">
-        {medidas.map((m) => <span class="chip">{m.medida}</span>)}
-      </div>
-    )}
+    <div class="info-top">
+      <span class="cat">{producto.categoria}</span>
+      <h3 class="nombre">{producto.nombre}</h3>
+      <p class="nota">{producto.descripcion}</p>
+      {tieneMedidas && (
+        <div class="chips">
+          {medidas.map((m) => <span class="chip">{m.medida}</span>)}
+        </div>
+      )}
+    </div>
     <div class="pie">
       <span class="precio">{precioLabel}</span>
       <span class="ver">Ver producto <span class="ver-flecha">→</span></span>
@@ -103,7 +112,11 @@ const precioLabel = tieneMedidas
     flex: 1;
     padding: 15px 3px 3px;
   }
+  .info-top {
+    flex: 1;
+  }
   .cat {
+    display: block;
     font-size: 10.5px;
     font-weight: 600;
     letter-spacing: 0.2em;
@@ -133,7 +146,7 @@ const precioLabel = tieneMedidas
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
-    margin-top: 11px;
+    margin-top: 12px;
   }
   .chip {
     font-size: 10.5px;
@@ -149,7 +162,7 @@ const precioLabel = tieneMedidas
     align-items: center;
     justify-content: space-between;
     gap: 14px;
-    margin-top: auto;
+    margin-top: 18px;
     padding-top: 14px;
     border-top: 1px solid var(--line);
   }

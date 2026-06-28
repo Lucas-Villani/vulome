@@ -24,6 +24,8 @@ const waInicial = linkWhatsapp(
 );
 
 const specs: { k: string; v: string }[] = [];
+if (producto.material) specs.push({ k: "Material", v: producto.material });
+if (producto.incluye) specs.push({ k: "Incluye", v: producto.incluye });
 if (tieneMedidas) specs.push({ k: "Variantes", v: medidas.map((m) => m.medida).join(" · ") });
 specs.push({ k: "Envíos", v: "A todo el país" });
 

@@ -43,6 +43,12 @@ content:
       - name: descripcion
         label: Descripción
         type: text
+      - name: material
+        label: Material (ej. Vidrio borosilicato)
+        type: string
+      - name: incluye
+        label: Qué incluye (ej. Tetera + infusor de acero)
+        type: string
       - name: imagenes
         label: Fotos del producto (subí varias de una y ordenalas arrastrando)
         type: image
