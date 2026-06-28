@@ -47,20 +47,26 @@ const precioLabel = tieneMedidas
 
 <style>
   .card {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #fffdfa;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 13px;
     color: var(--ink);
-    border-radius: var(--radius);
-    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.3s;
   }
   .card:hover {
     transform: translateY(-6px);
     box-shadow: var(--shadow);
+    border-color: var(--line-2);
   }
   .thumb {
     position: relative;
     overflow: hidden;
     background: var(--surface);
-    border-radius: var(--radius-sm);
+    border-radius: 7px;
     aspect-ratio: 4 / 5;
     display: grid;
     place-items: center;
@@ -92,10 +98,12 @@ const precioLabel = tieneMedidas
     border-radius: 999px;
   }
   .info {
-    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 15px 3px 3px;
   }
   .cat {
-    display: block;
     font-size: 10.5px;
     font-weight: 600;
     letter-spacing: 0.2em;
@@ -112,20 +120,20 @@ const precioLabel = tieneMedidas
   .nota {
     font-size: 13px;
     color: var(--ink-mute);
-    line-height: 1.55;
+    line-height: 1.5;
     margin-top: 6px;
-    min-height: 20px;
     display: -webkit-box;
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    min-height: 2.9em;
   }
   .chips {
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
-    margin-top: 12px;
+    margin-top: 11px;
   }
   .chip {
     font-size: 10.5px;
@@ -141,22 +149,23 @@ const precioLabel = tieneMedidas
     align-items: center;
     justify-content: space-between;
     gap: 14px;
-    margin-top: 16px;
+    margin-top: auto;
     padding-top: 14px;
-    border-top: 1px solid var(--surface-2);
+    border-top: 1px solid var(--line);
   }
   .precio {
     font-size: 16px;
     font-weight: 600;
     letter-spacing: -0.01em;
+    white-space: nowrap;
   }
   .ver {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
+    gap: 6px;
     font-size: 12px;
     font-weight: 600;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     color: var(--ink);
     white-space: nowrap;
   }
