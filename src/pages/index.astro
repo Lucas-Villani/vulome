@@ -1,100 +1,222 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Catalogo from "../components/Catalogo.astro";
-import CategoriaCard from "../components/CategoriaCard.astro";
-import IconoWhatsapp from "../components/IconoWhatsapp.astro";
+import Contacto from "../components/Contacto.astro";
 import { linkWhatsapp } from "../lib/utils";
-import { productos } from "../lib/productos";
 import sitio from "../data/sitio.json";
 import { categorias } from "../lib/categorias";
+import { productos } from "../lib/productos";
 
 const wa = linkWhatsapp(sitio.whatsapp, `¡Hola ${sitio.nombre}! Quería hacer una consulta 😊`);
+
+const destacado =
+  productos.find((p) => p.destacado && p.imagenes.length > 0) ??
+  productos.find((p) => p.imagenes.length > 0);
+const heroImg = destacado?.imagenes[0];
+
+const pad = (n: number) => (n < 10 ? "0" + n : "" + n);
+const cats = categorias.map((c, i) => ({
+  ...c,
+  num: pad(i + 1),
+  count: productos.filter((p) => p.categoria === c.nombre).length,
+}));
 ---
 
 <Layout>
   <section class="hero">
-    <div class="container hero-inner">
-      <p class="eyebrow">{sitio.tagline}</p>
-      <h1>Objetos simples para tu cocina y tu café.</h1>
+    <div class="hero-texto">
+      <p class="eyebrow">Bazar &amp; Barismo</p>
+      <h1>Objetos simples<br />para tu cocina<br />y tu <span>café.</span></h1>
       <p class="hero-sub">
-        Seleccionamos teteras, tazas y herramientas de barismo con diseño. Mirá el catálogo
+        Seleccionamos teteras, vasos y herramientas de barismo con diseño. Mirá el catálogo
         y escribinos por WhatsApp para comprar o consultar.
       </p>
       <div class="hero-cta">
         <a href="#catalogo" class="btn-primary">Ver catálogo</a>
-        <a href={wa} target="_blank" rel="noopener" class="btn-ghost">
-          <IconoWhatsapp size={17} />
-          Consultar por WhatsApp
-        </a>
+        <a href={wa} target="_blank" rel="noopener" class="btn-ghost">Consultar por WhatsApp</a>
       </div>
+    </div>
+    <div class="hero-foto">
+      {heroImg ? (
+        <img src={heroImg} alt={destacado?.nombre} />
+      ) : (
+        <span class="hero-foto-ph" aria-hidden="true">{sitio.nombre.charAt(0)}</span>
+      )}
     </div>
   </section>
 
-  <section class="section categorias">
-    <div class="container">
-      <div class="section-head">
+  <section id="categorias" class="categorias container">
+    <div class="cat-head">
+      <div>
+        <p class="eyebrow">Explorá por tipo</p>
         <h2>Categorías</h2>
-        <p>Explorá por tipo de producto</p>
       </div>
-      <div class="cat-grid">
-        {categorias.map((c) => <CategoriaCard categoria={c} />)}
-      </div>
+      <p class="cat-head-nota">Cinco familias de productos, una misma búsqueda de calidad.</p>
+    </div>
+    <div class="cat-lista">
+      {cats.map((c) => (
+        <a class="cat-row" href={`/categoria/${c.slug}`}>
+          <span class="cat-row-left">
+            <span class="cat-num">{c.num}</span>
+            <span class="cat-nombre">{c.nombre}</span>
+          </span>
+          <span class="cat-row-right">
+            <span class="cat-count">{c.count > 0 ? `${c.count} productos` : "Próximamente"}</span>
+            <span class="cat-flecha">→</span>
+          </span>
+        </a>
+      ))}
     </div>
   </section>
 
   <Catalogo productos={productos} categorias={categorias} />
+
+  <Contacto />
 </Layout>
 
 <style>
+  /* ===== HERO ===== */
   .hero {
-    position: relative;
-    padding-block: clamp(3.5rem, 9vw, 7rem);
-    border-bottom: 1px solid var(--line);
-    background:
-      radial-gradient(60% 55% at 50% 6%, rgba(17, 17, 16, 0.05), rgba(17, 17, 16, 0) 70%),
-      linear-gradient(180deg, var(--surface) 0%, #ffffff 62%);
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1.04fr 1fr;
+    gap: clamp(28px, 5vw, 72px);
+    align-items: center;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: clamp(44px, 6.5vw, 96px) var(--pad) clamp(40px, 5vw, 68px);
   }
-  .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(circle, rgba(17, 17, 16, 0.07) 1px, transparent 1.4px);
-    background-size: 24px 24px;
-    -webkit-mask-image: radial-gradient(72% 64% at 50% 24%, #000 5%, transparent 72%);
-    mask-image: radial-gradient(72% 64% at 50% 24%, #000 5%, transparent 72%);
-    opacity: 0.5;
-    pointer-events: none;
+  .hero-texto h1 {
+    margin-top: 26px;
+    font-weight: 300;
+    font-size: clamp(40px, 6.1vw, 82px);
+    line-height: 1;
+    letter-spacing: -0.028em;
   }
-  .hero-inner {
-    position: relative;
-    z-index: 1;
-    max-width: 760px;
-  }
-  .hero h1 {
-    margin-top: 1rem;
-    font-size: clamp(2.4rem, 6vw, 4.2rem);
-    font-weight: 600;
-    letter-spacing: -0.035em;
+  .hero-texto h1 span {
+    font-weight: 500;
   }
   .hero-sub {
-    margin-top: 1.4rem;
-    font-size: clamp(1rem, 2vw, 1.2rem);
+    margin-top: 30px;
+    max-width: 440px;
+    font-size: 15.5px;
+    line-height: 1.72;
     color: var(--ink-soft);
-    max-width: 52ch;
   }
   .hero-cta {
-    margin-top: 2.2rem;
     display: flex;
-    gap: 0.8rem;
+    gap: 14px;
+    margin-top: 38px;
     flex-wrap: wrap;
   }
-  .hero-cta .btn-ghost {
-    align-items: center;
-  }
-  .cat-grid {
+  .hero-foto {
+    position: relative;
+    overflow: hidden;
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+    aspect-ratio: 4 / 5;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: clamp(1rem, 2vw, 1.6rem);
+    place-items: center;
+  }
+  .hero-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--ease);
+  }
+  .hero-foto:hover img {
+    transform: scale(1.04);
+  }
+  .hero-foto-ph {
+    font-size: 5rem;
+    font-weight: 300;
+    color: var(--ink-faint);
+  }
+
+  /* ===== CATEGORÍAS (lista editorial) ===== */
+  .categorias {
+    padding-block: clamp(56px, 7vw, 96px) clamp(40px, 5vw, 64px);
+  }
+  .cat-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .cat-head h2 {
+    margin-top: 14px;
+    font-weight: 300;
+    font-size: clamp(28px, 4vw, 46px);
+    letter-spacing: -0.02em;
+  }
+  .cat-head-nota {
+    font-size: 13px;
+    color: var(--ink-mute);
+    max-width: 280px;
+    line-height: 1.6;
+  }
+  .cat-lista {
+    margin-top: 30px;
+    border-top: 1px solid var(--line-2);
+  }
+  .cat-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: clamp(18px, 2.4vw, 26px) clamp(8px, 1.5vw, 18px);
+    border-bottom: 1px solid var(--line-2);
+    color: var(--ink);
+    transition: padding-left 0.3s var(--ease), background 0.3s var(--ease);
+  }
+  .cat-row:hover {
+    padding-left: 26px;
+    background: rgba(255, 255, 255, 0.6);
+  }
+  .cat-row-left {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(16px, 2.5vw, 34px);
+    min-width: 0;
+  }
+  .cat-num {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--ink-faint-2);
+    flex: none;
+  }
+  .cat-nombre {
+    font-weight: 300;
+    font-size: clamp(24px, 3.4vw, 42px);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .cat-row-right {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 2vw, 28px);
+    flex: none;
+  }
+  .cat-count {
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+  }
+  .cat-flecha {
+    font-size: 22px;
+  }
+
+  @media (max-width: 820px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+    .hero-foto {
+      order: -1;
+      aspect-ratio: 16 / 10;
+    }
   }
 </style>

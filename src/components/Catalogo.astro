@@ -4,77 +4,69 @@ import ProductoCard from "./ProductoCard.astro";
 const { productos, categorias } = Astro.props;
 ---
 
-<section id="catalogo" class="catalogo section">
-  <div class="container">
-    <div class="section-head">
-      <h2>Catálogo</h2>
-      <p>{productos.length} productos disponibles</p>
+<section id="catalogo" class="catalogo container">
+  <div class="catalogo-head">
+    <div>
+      <p class="eyebrow">Nuestra selección</p>
+      <h2>Catálogo <span class="cuenta">· {productos.length} productos</span></h2>
     </div>
-
-    <div class="controles">
-      <div class="filtros" role="tablist" aria-label="Filtrar por categoría">
-        <button class="filtro is-active" data-filtro="Todos" type="button">Todos</button>
-        {categorias.map((c) => (
-          <button class="filtro" data-filtro={c.nombre} type="button">{c.nombre}</button>
-        ))}
-      </div>
-      <label class="search">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path>
-        </svg>
-        <input type="search" id="buscador" placeholder="Buscar productos..." autocomplete="off" />
-      </label>
-    </div>
-
-    <div class="grid-productos" id="grid">
-      {productos.map((p) => <ProductoCard producto={p} />)}
-    </div>
-
-    <p class="empty" id="empty" hidden>No encontramos productos con esos criterios.</p>
+    <label class="search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path>
+      </svg>
+      <input type="search" id="buscador" placeholder="Buscar productos..." autocomplete="off" />
+    </label>
   </div>
+
+  <div class="filtros" role="tablist" aria-label="Filtrar por categoría">
+    <button class="filtro is-active" data-filtro="Todos" type="button">Todos</button>
+    {categorias.map((c) => (
+      <button class="filtro" data-filtro={c.nombre} type="button">{c.nombre}</button>
+    ))}
+  </div>
+
+  <div class="grid-productos" id="grid">
+    {productos.map((p) => <ProductoCard producto={p} />)}
+  </div>
+
+  <p class="empty" id="empty" hidden>No encontramos productos con esos criterios.</p>
 </section>
 
 <style>
-  .controles {
+  .catalogo {
+    padding-block: clamp(40px, 5vw, 68px) clamp(64px, 8vw, 110px);
+  }
+  .catalogo-head {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    gap: 24px;
     flex-wrap: wrap;
+    margin-bottom: 30px;
   }
-  .filtros {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+  .catalogo-head h2 {
+    margin-top: 14px;
+    font-weight: 300;
+    font-size: clamp(28px, 4vw, 46px);
+    letter-spacing: -0.02em;
   }
-  .filtro {
-    padding: 0.55rem 1.1rem;
-    border-radius: 100px;
-    border: 1px solid var(--line);
-    background: transparent;
-    font-size: 0.88rem;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s, border-color 0.2s;
-  }
-  .filtro:hover {
-    background: var(--surface);
-  }
-  .filtro.is-active {
-    background: var(--accent);
-    color: var(--accent-ink);
-    border-color: var(--accent);
+  .cuenta {
+    font-size: 0.42em;
+    font-weight: 500;
+    color: var(--ink-mute);
+    letter-spacing: 0;
+    vertical-align: middle;
   }
   .search {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.55rem 1rem;
-    border: 1px solid var(--line);
-    border-radius: 100px;
-    color: var(--ink-soft);
+    padding: 0.7rem 1.1rem;
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    color: var(--ink-mute);
     transition: border-color 0.2s, color 0.2s;
-    min-width: 240px;
+    min-width: 230px;
   }
   .search:focus-within {
     border-color: var(--ink);
@@ -85,23 +77,45 @@ const { productos, categorias } = Astro.props;
     outline: none;
     background: none;
     width: 100%;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+  }
+  .filtros {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .filtro {
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 11px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    background: transparent;
+    color: var(--ink-mute);
+    border: 1px solid var(--line-2);
+    transition: background 0.25s var(--ease), color 0.25s, border-color 0.25s;
+  }
+  .filtro:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .filtro.is-active {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
   }
   .empty {
     text-align: center;
-    color: var(--ink-soft);
+    color: var(--ink-mute);
     padding: 3rem 0;
   }
-  .card.is-hidden {
-    display: none;
-  }
-  @media (max-width: 720px) {
-    .controles {
-      flex-direction: column;
-      align-items: stretch;
-    }
+  @media (max-width: 600px) {
     .search {
       min-width: 0;
+      width: 100%;
     }
     .filtros {
       overflow-x: auto;
@@ -149,7 +163,6 @@ const { productos, categorias } = Astro.props;
     );
     buscador?.addEventListener("input", aplicar);
 
-    // Filtro inicial desde la URL: /?cat=Barista
     const cat = new URLSearchParams(location.search).get("cat");
     if (cat) {
       const btn = filtros.find((b) => b.getAttribute("data-filtro") === cat);

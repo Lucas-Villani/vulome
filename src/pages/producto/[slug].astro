@@ -1,6 +1,5 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import IconoWhatsapp from "../../components/IconoWhatsapp.astro";
 import { productos } from "../../lib/productos";
 import { formatearPrecio, linkWhatsapp, slugify } from "../../lib/utils";
 import sitio from "../../data/sitio.json";
@@ -15,314 +14,509 @@ const fotos = producto.imagenes ?? [];
 const medidas = (producto.medidas ?? []).filter((m) => m && m.medida && m.precio);
 const tieneMedidas = medidas.length > 0;
 const catSlug = slugify(producto.categoria);
-const wa = linkWhatsapp(
+
+const precioInicial = tieneMedidas ? formatearPrecio(medidas[0].precio) : formatearPrecio(producto.precio);
+const medidasJS = medidas.map((m) => ({ medida: m.medida, precioFmt: formatearPrecio(m.precio) }));
+
+const waInicial = linkWhatsapp(
   sitio.whatsapp,
-  `¡Hola ${sitio.nombre}! Me interesa este producto: ${producto.nombre}. ¿Está disponible?`
+  `¡Hola ${sitio.nombre}! Me interesa: ${producto.nombre}${tieneMedidas ? ` (${medidas[0].medida})` : ""}. ¿Está disponible?`
 );
+
+const specs: { k: string; v: string }[] = [];
+if (tieneMedidas) specs.push({ k: "Variantes", v: medidas.map((m) => m.medida).join(" · ") });
+specs.push({ k: "Envíos", v: "A todo el país" });
+
+const relacionados = productos
+  .filter((p) => p.categoria === producto.categoria && p.slug !== producto.slug)
+  .slice(0, 3);
+const precioCard = (p: (typeof productos)[number]) => {
+  const ms = (p.medidas ?? []).filter((m) => m && m.medida && m.precio);
+  return ms.length ? `desde ${formatearPrecio(Math.min(...ms.map((m) => m.precio)))}` : formatearPrecio(p.precio);
+};
 ---
 
 <Layout title={`${producto.nombre} — VULOME`} description={producto.descripcion}>
-  <section class="detalle section">
-    <div class="container">
-      <nav class="crumbs">
-        <a href="/">Inicio</a><span>/</span>
-        <a href={`/categoria/${catSlug}`}>{producto.categoria}</a><span>/</span>
-        <span class="current">{producto.nombre}</span>
-      </nav>
+  <section class="detalle container">
+    <nav class="crumbs">
+      <a href="/">Inicio</a><span>/</span>
+      <a href={`/categoria/${catSlug}`}>{producto.categoria}</a><span>/</span>
+      <span class="current">{producto.nombre}</span>
+    </nav>
 
-      <div class="detalle-grid">
-        <div class="galeria">
+    <div class="detalle-grid">
+      <div class="galeria">
+        <div class="carrusel">
           {fotos.length > 0 ? (
-            <div class="carrusel">
-              <div class="carrusel-viewport">
-                <img id="fotoPrincipal" src={fotos[0]} alt={producto.nombre} />
-              </div>
-              {fotos.length > 1 && (
-                <div class="carrusel-controles">
-                  <button class="flecha flecha-prev" id="flechaPrev" type="button" aria-label="Foto anterior">
-                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m15 18-6-6 6-6"></path></svg>
-                  </button>
-                  <button class="flecha flecha-next" id="flechaNext" type="button" aria-label="Foto siguiente">
-                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 18 6-6-6-6"></path></svg>
-                  </button>
-                  <div class="contador"><span id="contadorActual">1</span> / {fotos.length}</div>
-                </div>
-              )}
-            </div>
+            <img id="fotoPrincipal" src={fotos[0]} alt={producto.nombre} />
           ) : (
-            <div class="carrusel-viewport sin-foto"><span aria-hidden="true">{inicial}</span></div>
+            <div class="sin-foto"><span aria-hidden="true">{inicial}</span></div>
           )}
-
           {fotos.length > 1 && (
-            <div class="miniaturas">
-              {fotos.map((f, i) => (
-                <button class={i === 0 ? "mini activa" : "mini"} data-index={i} type="button" aria-label={`Ver foto ${i + 1}`}>
-                  <img src={f} alt={`${producto.nombre} ${i + 1}`} />
-                </button>
-              ))}
-            </div>
+            <Fragment>
+              <button class="flecha flecha-prev" id="flechaPrev" type="button" aria-label="Anterior">←</button>
+              <button class="flecha flecha-next" id="flechaNext" type="button" aria-label="Siguiente">→</button>
+              <div class="contador"><span id="contadorActual">1</span> / {fotos.length}</div>
+            </Fragment>
           )}
         </div>
+        {fotos.length > 1 && (
+          <div class="thumbs">
+            {fotos.map((f, i) => (
+              <button class={i === 0 ? "thumb activa" : "thumb"} data-index={i} type="button" aria-label={`Foto ${i + 1}`}>
+                <img src={f} alt={`${producto.nombre} ${i + 1}`} />
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
 
-        <div class="detalle-info">
-          <span class="cat">{producto.categoria}</span>
-          <h1>{producto.nombre}</h1>
+      <div class="info">
+        <p class="cat">{producto.categoria}</p>
+        <h1>{producto.nombre}</h1>
+        <div class="precio" id="precio">{precioInicial}</div>
+        <p class="desc">{producto.descripcion}</p>
 
-          {tieneMedidas ? (
-            <div class="precios">
-              {medidas.map((m) => (
-                <div class="precio-row">
-                  <span class="precio-medida">{m.medida}</span>
-                  <strong class="precio-valor">{formatearPrecio(m.precio)}</strong>
-                </div>
+        {tieneMedidas && (
+          <div class="variantes">
+            <p class="variantes-label">Variante</p>
+            <div class="variantes-chips">
+              {medidas.map((m, i) => (
+                <button class={i === 0 ? "vchip activa" : "vchip"} data-index={i} type="button">{m.medida}</button>
               ))}
             </div>
-          ) : (
-            <div class="precio-unico">{formatearPrecio(producto.precio)}</div>
-          )}
+          </div>
+        )}
 
-          <p class="descripcion">{producto.descripcion}</p>
+        <a class="cta-wpp" id="ctaWpp" href={waInicial} target="_blank" rel="noopener">
+          <span class="cta-ico" aria-hidden="true">✓</span>
+          Consultar por WhatsApp
+        </a>
+        <a class="volver" href="/#catalogo">← Volver al catálogo</a>
 
-          <a class="btn-whatsapp" href={wa} target="_blank" rel="noopener">
-            <IconoWhatsapp size={20} />
-            Consultar por WhatsApp
-          </a>
-          <a class="volver" href="/#catalogo">← Volver al catálogo</a>
+        <div class="specs">
+          {specs.map((s) => (
+            <div class="spec-row">
+              <span class="spec-k">{s.k}</span>
+              <span class="spec-v">{s.v}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
+
+    {relacionados.length > 0 && (
+      <div class="relacionados">
+        <div class="rel-head">
+          <h2>También te puede gustar</h2>
+          <a href={`/categoria/${catSlug}`} class="rel-ver">Ver {producto.categoria} →</a>
+        </div>
+        <div class="rel-grid">
+          {relacionados.map((p) => (
+            <a class="rel-card" href={`/producto/${p.slug}`}>
+              <div class="rel-thumb">
+                {p.imagenes[0] ? (
+                  <img src={p.imagenes[0]} alt={p.nombre} loading="lazy" />
+                ) : (
+                  <span class="rel-ph" aria-hidden="true">{p.nombre.charAt(0)}</span>
+                )}
+              </div>
+              <div class="rel-nombre">{p.nombre}</div>
+              <div class="rel-precio">{precioCard(p)}</div>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
   </section>
 </Layout>
 
 <style>
+  .detalle {
+    padding-block: clamp(22px, 3vw, 34px) clamp(56px, 7vw, 96px);
+  }
   .crumbs {
     display: flex;
-    gap: 0.5rem;
     align-items: center;
+    gap: 9px;
     flex-wrap: wrap;
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-    margin-bottom: 2rem;
+    font-size: 12px;
+    color: var(--ink-faint);
+    margin-bottom: clamp(24px, 3vw, 38px);
+  }
+  .crumbs a {
+    color: var(--ink-mute);
+    transition: color 0.2s;
   }
   .crumbs a:hover {
     color: var(--ink);
   }
   .crumbs .current {
     color: var(--ink);
+    font-weight: 500;
   }
   .detalle-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(1.5rem, 4vw, 3.5rem);
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 72px);
     align-items: start;
   }
 
-  /* ===== Carrusel ===== */
+  /* galería */
+  .galeria {
+    position: sticky;
+    top: 90px;
+  }
   .carrusel {
     position: relative;
+    background: var(--surface);
     border-radius: var(--radius);
     overflow: hidden;
-  }
-  .carrusel-viewport {
     aspect-ratio: 1 / 1;
-    background: var(--surface);
     display: grid;
     place-items: center;
-    overflow: hidden;
   }
-  .carrusel-viewport img {
+  .carrusel img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    user-select: none;
   }
-  .carrusel-viewport.sin-foto {
-    border-radius: var(--radius);
-  }
-  .carrusel-viewport.sin-foto span {
+  .sin-foto span {
     font-size: 5rem;
-    font-weight: 600;
+    font-weight: 300;
     color: var(--ink-faint);
   }
   .flecha {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
     border: none;
-    background: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.9);
     color: var(--ink);
-    display: grid;
-    place-items: center;
+    font-size: 16px;
     cursor: pointer;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.14);
-    transition: background 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(20, 17, 15, 0.12);
+    transition: background 0.2s;
   }
   .flecha:hover {
     background: #fff;
   }
-  .flecha:active {
-    transform: translateY(-50%) scale(0.92);
-  }
   .flecha-prev {
-    left: 0.8rem;
+    left: 16px;
   }
   .flecha-next {
-    right: 0.8rem;
+    right: 16px;
   }
   .contador {
     position: absolute;
-    bottom: 0.8rem;
-    right: 0.8rem;
-    background: rgba(17, 17, 16, 0.72);
+    right: 16px;
+    bottom: 16px;
+    background: rgba(20, 17, 15, 0.78);
     color: #fff;
-    font-size: 0.78rem;
-    font-weight: 500;
-    padding: 0.22rem 0.65rem;
-    border-radius: 100px;
-    backdrop-filter: blur(4px);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 5px 11px;
+    border-radius: 999px;
   }
-
-  /* ===== Miniaturas ===== */
-  .miniaturas {
+  .thumbs {
     display: flex;
-    gap: 0.6rem;
-    margin-top: 0.8rem;
-    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
   }
-  .mini {
-    width: 66px;
-    height: 66px;
-    border-radius: var(--radius-sm);
+  .thumb {
+    flex: 1;
+    border-radius: 3px;
     overflow: hidden;
-    border: 1px solid var(--line);
-    background: var(--surface);
     cursor: pointer;
+    background: var(--surface);
+    border: none;
     padding: 0;
-    transition: border-color 0.2s;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    transition: outline-color 0.2s;
   }
-  .mini.activa {
-    border-color: var(--ink);
+  .thumb.activa {
+    outline-color: var(--ink);
   }
-  .mini img {
+  .thumb img {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
   }
 
-  /* ===== Info ===== */
-  .detalle-info .cat {
-    font-size: 0.75rem;
+  /* info */
+  .info .cat {
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
     color: var(--ink-faint);
+    margin-bottom: 18px;
   }
-  .detalle-info h1 {
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
+  .info h1 {
+    font-weight: 400;
+    font-size: clamp(30px, 4vw, 50px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+  .precio {
+    font-size: clamp(24px, 3vw, 32px);
     font-weight: 600;
-    letter-spacing: -0.03em;
-    margin: 0.5rem 0 1.2rem;
+    letter-spacing: -0.01em;
+    margin-top: 20px;
   }
-  .precios {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    max-width: 320px;
-  }
-  .precio-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-    padding: 0.6rem 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .precio-medida {
+  .desc {
+    margin-top: 26px;
+    max-width: 480px;
+    font-size: 15px;
+    line-height: 1.75;
     color: var(--ink-soft);
-  }
-  .precio-valor {
-    font-size: 1.2rem;
-    font-weight: 600;
-  }
-  .precio-unico {
-    font-size: 2rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-  }
-  .descripcion {
-    color: var(--ink-soft);
-    line-height: 1.65;
-    margin: 1.4rem 0 2rem;
     white-space: pre-line;
   }
-  .btn-whatsapp {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: var(--accent);
-    color: var(--accent-ink);
-    padding: 0.95rem 1.8rem;
-    border-radius: 100px;
-    font-weight: 500;
-    transition: transform 0.2s, opacity 0.2s;
+  .variantes {
+    margin-top: 30px;
   }
-  .btn-whatsapp:hover {
-    transform: translateY(-2px);
-    opacity: 0.92;
+  .variantes-label {
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 12px;
+  }
+  .variantes-chips {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .vchip {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 12px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line-2);
+    transition: all 0.2s var(--ease);
+  }
+  .vchip.activa {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+  .cta-wpp {
+    margin-top: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    background: var(--ink);
+    color: #fff;
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 19px 30px;
+    border-radius: 999px;
+    max-width: 420px;
+    transition: opacity 0.2s;
+  }
+  .cta-wpp:hover {
+    opacity: 0.84;
+  }
+  .cta-ico {
+    display: inline-flex;
+    width: 21px;
+    height: 21px;
+    border-radius: 999px;
+    background: #25d366;
+    color: #14110f;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
   }
   .volver {
-    display: block;
-    margin-top: 1.5rem;
-    color: var(--ink-soft);
-    font-size: 0.9rem;
+    display: inline-block;
+    margin-top: 18px;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink-mute);
+    transition: color 0.2s;
   }
   .volver:hover {
     color: var(--ink);
   }
-  @media (max-width: 800px) {
+  .specs {
+    margin-top: 38px;
+    border-top: 1px solid var(--line-2);
+  }
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 2px;
+    border-bottom: 1px solid var(--line);
+    font-size: 13.5px;
+  }
+  .spec-k {
+    color: var(--ink-mute);
+    font-weight: 500;
+  }
+  .spec-v {
+    color: var(--ink);
+    font-weight: 500;
+    text-align: right;
+  }
+
+  /* relacionados */
+  .relacionados {
+    margin-top: clamp(64px, 8vw, 110px);
+  }
+  .rel-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 34px;
+  }
+  .rel-head h2 {
+    font-weight: 300;
+    font-size: clamp(24px, 3vw, 38px);
+    letter-spacing: -0.02em;
+  }
+  .rel-ver {
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink-mute);
+    transition: color 0.2s;
+  }
+  .rel-ver:hover {
+    color: var(--ink);
+  }
+  .rel-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 36px;
+  }
+  .rel-card {
+    color: var(--ink);
+  }
+  .rel-thumb {
+    position: relative;
+    overflow: hidden;
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+    aspect-ratio: 4 / 5;
+    display: grid;
+    place-items: center;
+  }
+  .rel-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--ease);
+  }
+  .rel-card:hover .rel-thumb img {
+    transform: scale(1.05);
+  }
+  .rel-ph {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--ink-faint);
+  }
+  .rel-nombre {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-top: 14px;
+  }
+  .rel-precio {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 6px;
+  }
+
+  @media (max-width: 860px) {
     .detalle-grid {
       grid-template-columns: 1fr;
+    }
+    .galeria {
+      position: static;
+    }
+  }
+  @media (max-width: 640px) {
+    .rel-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .rel-grid .rel-card:last-child {
+      display: none;
     }
   }
 </style>
 
-<script define:vars={{ fotos }}>
+<script define:vars={{ fotos, medidasJS, waNumero: sitio.whatsapp, nombreProd: producto.nombre, marca: sitio.nombre }}>
+  // ===== galería =====
   const principal = document.getElementById("fotoPrincipal");
   if (principal && fotos.length > 1) {
     const prev = document.getElementById("flechaPrev");
     const next = document.getElementById("flechaNext");
     const contador = document.getElementById("contadorActual");
-    const minis = Array.from(document.querySelectorAll(".mini"));
+    const thumbs = Array.from(document.querySelectorAll(".thumb"));
     let actual = 0;
-
-    function mostrar(i) {
+    const mostrar = (i) => {
       actual = (i + fotos.length) % fotos.length;
       principal.src = fotos[actual];
       if (contador) contador.textContent = String(actual + 1);
-      minis.forEach((m, idx) => m.classList.toggle("activa", idx === actual));
-    }
-
+      thumbs.forEach((t, idx) => t.classList.toggle("activa", idx === actual));
+    };
     if (prev) prev.addEventListener("click", () => mostrar(actual - 1));
     if (next) next.addEventListener("click", () => mostrar(actual + 1));
-    minis.forEach((m, idx) => m.addEventListener("click", () => mostrar(idx)));
-
+    thumbs.forEach((t, idx) => t.addEventListener("click", () => mostrar(idx)));
     document.addEventListener("keydown", (e) => {
       if (e.key === "ArrowLeft") mostrar(actual - 1);
       else if (e.key === "ArrowRight") mostrar(actual + 1);
     });
-
-    const viewport = document.querySelector(".carrusel-viewport");
+    const carrusel = document.querySelector(".carrusel");
     let x0 = null;
-    if (viewport) {
-      viewport.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
-      viewport.addEventListener("touchend", (e) => {
+    if (carrusel) {
+      carrusel.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+      carrusel.addEventListener("touchend", (e) => {
         if (x0 === null) return;
         const dx = e.changedTouches[0].clientX - x0;
         if (Math.abs(dx) > 40) mostrar(actual + (dx < 0 ? 1 : -1));
         x0 = null;
       }, { passive: true });
     }
+  }
+
+  // ===== selector de variantes =====
+  const precioEl = document.getElementById("precio");
+  const cta = document.getElementById("ctaWpp");
+  const vchips = Array.from(document.querySelectorAll(".vchip"));
+  if (vchips.length && medidasJS.length) {
+    const num = (waNumero || "").replace(/[^0-9]/g, "");
+    const elegir = (i) => {
+      const m = medidasJS[i];
+      if (precioEl) precioEl.textContent = m.precioFmt;
+      vchips.forEach((c, idx) => c.classList.toggle("activa", idx === i));
+      if (cta) {
+        const txt = "¡Hola " + marca + "! Me interesa: " + nombreProd + " (" + m.medida + ") — " + m.precioFmt + ". ¿Está disponible?";
+        cta.href = "https://wa.me/" + num + "?text=" + encodeURIComponent(txt);
+      }
+    };
+    vchips.forEach((c, idx) => c.addEventListener("click", () => elegir(idx)));
   }
 </script>

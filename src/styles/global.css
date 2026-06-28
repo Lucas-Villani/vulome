@@ -1,28 +1,31 @@
 /* ===========================================================
    VULOME — estilos globales
-   Paleta monocromática: blanco / gris / negro. Minimalista.
+   Paleta cálida (crema / beige / negro cálido). Editorial, minimalista.
    =========================================================== */
 
 :root {
-  --bg: #ffffff;
-  --surface: #f5f5f4;
-  --surface-hover: #ececea;
-  --ink: #111110;
-  --ink-soft: #6b6b67;
-  --ink-faint: #9b9b96;
-  --line: #e7e7e3;
-  --accent: #111110;
+  --bg: #f6f4f0;
+  --surface: #ece8e1;
+  --surface-2: #efece6;
+  --ink: #14110f;
+  --ink-soft: #6f6960;
+  --ink-mute: #807a71;
+  --ink-faint: #aaa298;
+  --ink-faint-2: #bcb4a9;
+  --line: #e6e2db;
+  --line-2: #e1dcd3;
+  --accent: #14110f;
   --accent-ink: #ffffff;
 
-  --radius: 16px;
-  --radius-sm: 10px;
-  --maxw: 1200px;
-  --pad: clamp(1.1rem, 4vw, 2.5rem);
+  --radius: 4px;
+  --radius-sm: 2px;
+  --maxw: 1340px;
+  --pad: clamp(20px, 5vw, 64px);
 
-  --font: "General Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  --font-titulo: "Montserrat", "General Sans", sans-serif;
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --shadow: 0 1px 2px rgba(17, 17, 16, 0.04), 0 10px 30px rgba(17, 17, 16, 0.07);
+  --font: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-titulo: "Montserrat", sans-serif;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --shadow: 0 24px 50px rgba(20, 17, 15, 0.1);
 }
 
 /* ===== Reset ===== */
@@ -42,7 +45,8 @@ body {
   font-family: var(--font);
   color: var(--ink);
   background: var(--bg);
-  line-height: 1.55;
+  line-height: 1.6;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -64,9 +68,13 @@ h1,
 h2,
 h3,
 h4 {
-  line-height: 1.08;
+  line-height: 1.05;
   letter-spacing: -0.02em;
-  font-weight: 600;
+  font-weight: 300;
+}
+::selection {
+  background: var(--ink);
+  color: #fff;
 }
 
 /* ===== Utilidades de layout ===== */
@@ -81,24 +89,26 @@ h4 {
 }
 .eyebrow {
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: 0.72rem;
+  letter-spacing: 0.26em;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: var(--ink-soft);
+  color: var(--ink-faint);
 }
 .section-head {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  flex-wrap: wrap;
 }
 .section-head h2 {
-  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-size: clamp(1.8rem, 4vw, 2.9rem);
+  font-weight: 300;
 }
 .section-head p {
-  color: var(--ink-soft);
-  font-size: 0.95rem;
+  color: var(--ink-mute);
+  font-size: 0.9rem;
 }
 
 /* ===== Botones ===== */
@@ -107,10 +117,11 @@ h4 {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.85rem 1.5rem;
-  border-radius: 100px;
-  font-weight: 500;
-  font-size: 0.95rem;
+  padding: 0.95rem 1.9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
   cursor: pointer;
   transition: transform 0.25s var(--ease), background 0.25s, border-color 0.25s, opacity 0.25s;
 }
@@ -120,27 +131,25 @@ h4 {
   border: 1px solid var(--accent);
 }
 .btn-primary:hover {
-  transform: translateY(-2px);
-  opacity: 0.92;
+  opacity: 0.82;
 }
 .btn-ghost {
   background: transparent;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-2);
+  color: var(--ink);
 }
 .btn-ghost:hover {
-  background: var(--surface);
-  border-color: var(--ink-faint);
+  border-color: var(--ink);
 }
 
 /* ===== Grilla de productos (compartida) ===== */
 .grid-productos {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: clamp(1rem, 2vw, 1.6rem);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: clamp(2rem, 3.5vw, 3.4rem) clamp(1.4rem, 2.5vw, 2.25rem);
 }
 
-/* El filtro y el buscador del catálogo ocultan tarjetas con esta clase.
-   Debe ser global (no scoped) para alcanzar las .card de ProductoCard. */
+/* El filtro y el buscador del catálogo ocultan tarjetas con esta clase. */
 .card.is-hidden {
   display: none !important;
 }
