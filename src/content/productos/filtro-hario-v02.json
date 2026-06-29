@@ -3,6 +3,8 @@
   "categoria": "Barista",
   "precio": 24999,
   "descripcion": "Filtros de papel tipo Hario V60 tamaño 02, ideales para preparar café filtrado de forma práctica, limpia y prolija. Su diseño cónico favorece una extracción pareja, ayudando a resaltar el aroma y sabor del café en cada preparación.\n\nSon descartables, fáciles de usar y una excelente opción para quienes buscan un método de filtrado simple, ordenado y consistente en casa, cafeterías o espacios baristas.",
+  "material": "Papel de celulosa",
+  "incluye": "100 filtros",
   "imagenes": [
     "/images/productos/1-14.webp",
     "/images/productos/2-14.webp",
