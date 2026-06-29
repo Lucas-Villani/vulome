@@ -3,6 +3,8 @@
   "categoria": "Barista",
   "precio": 11999,
   "descripcion": "Tamping mat de silicona antideslizante, ideal para apoyar el portafiltro y prensar el café de forma cómoda, firme y prolija. Su diseño ayuda a proteger la mesada y brinda mayor estabilidad durante el tamping.\n\nEs práctica, resistente y fácil de limpiar, una herramienta esencial para preparar espresso en casa, cafeterías o espacios baristas.",
+  "material": "Silicona antideslizante",
+  "incluye": "1 tamping mat",
   "imagenes": [
     "/images/productos/1-10.webp",
     "/images/productos/2-10.webp",
