@@ -7,7 +7,11 @@ const wa = linkWhatsapp(sitio.whatsapp, `¡Hola ${sitio.nombre}! Quería hacer u
 
 <header class="site-header">
   <div class="header-inner container">
-    <a href="/" class="logo" aria-label={`${sitio.nombre} inicio`}>{sitio.nombre}</a>
+    <a href="/" class="logo" aria-label={`${sitio.nombre} inicio`}>
+      <span class="logo-v">V</span>
+      <span class="logo-sep"></span>
+      <span class="logo-txt">{sitio.nombre}</span>
+    </a>
     <nav class="nav">
       <a href="/#categorias" class="nav-link">Categorías</a>
       <a href="/#catalogo" class="nav-link">Catálogo</a>
@@ -31,7 +35,7 @@ const wa = linkWhatsapp(sitio.whatsapp, `¡Hola ${sitio.nombre}! Quería hacer u
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(246, 244, 240, 0.82);
+    background: rgba(245, 243, 239, 0.84);
     backdrop-filter: saturate(180%) blur(16px);
     border-bottom: 1px solid var(--line);
   }
@@ -39,24 +43,40 @@ const wa = linkWhatsapp(sitio.whatsapp, `¡Hola ${sitio.nombre}! Quería hacer u
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-block: 17px;
+    padding-block: 15px;
   }
   .logo {
-    font-weight: 600;
-    font-size: 18px;
-    letter-spacing: 0.42em;
-    padding-left: 0.42em;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    color: var(--ink);
+  }
+  .logo-v {
+    font-family: var(--font-serif);
+    font-size: 30px;
+    line-height: 0.7;
+  }
+  .logo-sep {
+    width: 1px;
+    height: 20px;
+    background: #cfc9bd;
+  }
+  .logo-txt {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.34em;
+    padding-left: 0.34em;
   }
   .nav {
     display: flex;
     align-items: center;
-    gap: clamp(16px, 3vw, 38px);
+    gap: clamp(16px, 3vw, 36px);
   }
   .nav-link {
     color: var(--ink-mute);
     font-size: 12.5px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
+    font-weight: 400;
+    letter-spacing: 0.02em;
     transition: color 0.2s;
   }
   .nav-link:hover {
@@ -69,10 +89,10 @@ const wa = linkWhatsapp(sitio.whatsapp, `¡Hola ${sitio.nombre}! Quería hacer u
     background: var(--ink);
     color: #fff;
     font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
+    font-weight: 500;
+    letter-spacing: 0.04em;
     padding: 11px 18px;
-    border-radius: 999px;
+    border-radius: 5px;
     transition: opacity 0.2s;
   }
   .nav-wpp:hover {
@@ -111,7 +131,6 @@ const wa = linkWhatsapp(sitio.whatsapp, `¡Hola ${sitio.nombre}! Quería hacer u
   .nav-mobile.open {
     display: flex;
   }
-
   @media (max-width: 760px) {
     .nav {
       display: none;

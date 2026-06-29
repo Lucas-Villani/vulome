@@ -10,7 +10,7 @@ const ig = sitio.instagram ? `https://instagram.com/${sitio.instagram}` : null;
   <div class="contacto-inner container">
     <div class="contacto-texto">
       <p class="eyebrow contacto-eyebrow">Hacé tu pedido</p>
-      <h2>¿Te gustó algo?<br /><strong>Escribinos.</strong></h2>
+      <h2>¿Te gustó algo? <span class="italic">Escribinos.</span></h2>
       <p class="contacto-sub">
         Consultá disponibilidad, precios y envíos por WhatsApp. Respondemos a la brevedad.
       </p>
@@ -38,7 +38,7 @@ const ig = sitio.instagram ? `https://instagram.com/${sitio.instagram}` : null;
 
 <style>
   .contacto {
-    background: #14110f;
+    background: var(--hero-bg);
     color: #fff;
   }
   .contacto-inner {
@@ -53,25 +53,20 @@ const ig = sitio.instagram ? `https://instagram.com/${sitio.instagram}` : null;
   }
   .contacto-texto h2 {
     margin-top: 24px;
-    font-weight: 300;
-    font-size: clamp(32px, 5vw, 62px);
-    line-height: 1.05;
-    letter-spacing: -0.025em;
-  }
-  .contacto-texto h2 strong {
-    font-weight: 500;
+    font-size: clamp(38px, 5.4vw, 72px);
+    line-height: 1.02;
   }
   .contacto-sub {
     margin-top: 26px;
     max-width: 440px;
     font-size: 15px;
     line-height: 1.7;
-    color: #b8b2a8;
+    color: #b3ada3;
   }
   .contacto-acciones {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
   }
   .accion {
     display: flex;
@@ -79,12 +74,12 @@ const ig = sitio.instagram ? `https://instagram.com/${sitio.instagram}` : null;
     justify-content: space-between;
     gap: 1rem;
     padding: 22px 26px;
-    border-radius: 14px;
+    border-radius: 8px;
     transition: transform 0.25s var(--ease), border-color 0.25s;
   }
   .accion-wpp {
     background: #fff;
-    color: #14110f;
+    color: var(--ink);
   }
   .accion-wpp:hover {
     transform: translateY(-3px);
@@ -104,11 +99,16 @@ const ig = sitio.instagram ? `https://instagram.com/${sitio.instagram}` : null;
     gap: 4px;
   }
   .accion-label {
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 10px;
+    font-weight: 500;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    opacity: 0.55;
+  }
+  .accion-wpp .accion-label {
+    color: var(--ink-faint);
+  }
+  .accion-ig .accion-label {
+    color: #837d73;
   }
   .accion-valor {
     font-size: 18px;

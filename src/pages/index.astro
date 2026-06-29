@@ -24,24 +24,29 @@ const cats = categorias.map((c, i) => ({
 
 <Layout>
   <section class="hero">
-    <div class="hero-texto">
-      <p class="eyebrow">Bazar &amp; Barismo</p>
-      <h1>Objetos simples<br />para tu cocina<br />y tu <span>café.</span></h1>
-      <p class="hero-sub">
-        Seleccionamos teteras, vasos y herramientas de barismo con diseño. Mirá el catálogo
-        y escribinos por WhatsApp para comprar o consultar.
-      </p>
-      <div class="hero-cta">
-        <a href="#catalogo" class="btn-primary">Ver catálogo</a>
-        <a href={wa} target="_blank" rel="noopener" class="btn-ghost">Consultar por WhatsApp</a>
+    <div class="hero-inner container">
+      <div class="hero-texto">
+        <div class="hero-eyebrow">
+          <span>Bazar &amp; Barismo</span>
+          <span class="hero-line"></span>
+        </div>
+        <h1>Objetos para el ritual del <span class="italic">café y el té.</span></h1>
+        <p class="hero-sub">
+          Teteras, vasos y herramientas de barismo con diseño. Mirá el catálogo y escribinos
+          por WhatsApp para comprar o consultar.
+        </p>
+        <div class="hero-cta">
+          <a href="#catalogo" class="hero-btn-light">Ver catálogo</a>
+          <a href={wa} target="_blank" rel="noopener" class="hero-btn-ghost">Consultar por WhatsApp</a>
+        </div>
       </div>
-    </div>
-    <div class="hero-foto">
-      {heroImg ? (
-        <img src={heroImg} alt={destacado?.nombre} />
-      ) : (
-        <span class="hero-foto-ph" aria-hidden="true">{sitio.nombre.charAt(0)}</span>
-      )}
+      <div class="hero-foto">
+        {heroImg ? (
+          <img src={heroImg} alt={destacado?.nombre} />
+        ) : (
+          <span class="hero-foto-ph" aria-hidden="true">V</span>
+        )}
+      </div>
     </div>
   </section>
 
@@ -51,18 +56,18 @@ const cats = categorias.map((c, i) => ({
         <p class="eyebrow">Explorá por tipo</p>
         <h2>Categorías</h2>
       </div>
-      <p class="cat-head-nota">Cinco familias de productos, una misma búsqueda de calidad.</p>
+      <span class="cat-head-meta">{pad(cats.length)} familias</span>
     </div>
-    <div class="cat-lista">
+    <div class="cat-grid">
       {cats.map((c) => (
-        <a class="cat-row" href="#catalogo" data-cat={c.nombre}>
-          <span class="cat-row-left">
-            <span class="cat-num">{c.num}</span>
-            <span class="cat-nombre">{c.nombre}</span>
+        <a class="cat-card" href="#catalogo" data-cat={c.nombre}>
+          <span class="cat-card-top">
+            <span class="cat-card-num">/{c.num}</span>
+            <span class="cat-card-arrow">→</span>
           </span>
-          <span class="cat-row-right">
-            <span class="cat-count">{c.count > 0 ? `${c.count} productos` : "Próximamente"}</span>
-            <span class="cat-flecha">→</span>
+          <span class="cat-card-bottom">
+            <span class="cat-card-nombre">{c.nombre}</span>
+            <span class="cat-card-count">{c.count > 0 ? `${c.count} productos` : "Próximamente"}</span>
           </span>
         </a>
       ))}
@@ -75,44 +80,85 @@ const cats = categorias.map((c, i) => ({
 </Layout>
 
 <style>
-  /* ===== HERO ===== */
+  /* ===== HERO (oscuro) ===== */
   .hero {
+    background: var(--hero-bg);
+    color: #fff;
+  }
+  .hero-inner {
     display: grid;
-    grid-template-columns: 1.04fr 1fr;
+    grid-template-columns: 1.05fr 1fr;
     gap: clamp(28px, 5vw, 72px);
     align-items: center;
-    max-width: var(--maxw);
-    margin: 0 auto;
-    padding: clamp(44px, 6.5vw, 96px) var(--pad) clamp(40px, 5vw, 68px);
+    padding-block: clamp(48px, 6.5vw, 104px);
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 30px;
+  }
+  .hero-eyebrow span:first-child {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #837d73;
+  }
+  .hero-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.14);
+    max-width: 120px;
   }
   .hero-texto h1 {
-    margin-top: 26px;
-    font-weight: 300;
-    font-size: clamp(40px, 6.1vw, 82px);
+    font-size: clamp(44px, 6.6vw, 92px);
     line-height: 1;
-    letter-spacing: -0.028em;
-  }
-  .hero-texto h1 span {
-    font-weight: 500;
   }
   .hero-sub {
     margin-top: 30px;
-    max-width: 440px;
-    font-size: 15.5px;
+    max-width: 430px;
+    font-size: 15px;
     line-height: 1.72;
-    color: var(--ink-soft);
+    color: #b3ada3;
   }
   .hero-cta {
     display: flex;
-    gap: 14px;
+    gap: 12px;
     margin-top: 38px;
     flex-wrap: wrap;
+  }
+  .hero-btn-light {
+    background: #fff;
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    padding: 15px 30px;
+    border-radius: 5px;
+    transition: opacity 0.2s;
+  }
+  .hero-btn-light:hover {
+    opacity: 0.85;
+  }
+  .hero-btn-ghost {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    padding: 15px 26px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    transition: border-color 0.2s;
+  }
+  .hero-btn-ghost:hover {
+    border-color: rgba(255, 255, 255, 0.6);
   }
   .hero-foto {
     position: relative;
     overflow: hidden;
-    background: var(--surface);
-    border-radius: var(--radius-sm);
+    background: var(--hero-surface);
+    border-radius: 4px;
     aspect-ratio: 4 / 5;
     display: grid;
     place-items: center;
@@ -127,14 +173,14 @@ const cats = categorias.map((c, i) => ({
     transform: scale(1.04);
   }
   .hero-foto-ph {
-    font-size: 5rem;
-    font-weight: 300;
-    color: var(--ink-faint);
+    font-family: var(--font-serif);
+    font-size: 6rem;
+    color: rgba(255, 255, 255, 0.2);
   }
 
-  /* ===== CATEGORÍAS (lista editorial) ===== */
+  /* ===== CATEGORÍAS (grilla) ===== */
   .categorias {
-    padding-block: clamp(56px, 7vw, 96px) clamp(40px, 5vw, 64px);
+    padding-block: clamp(56px, 7vw, 96px) clamp(36px, 4vw, 56px);
   }
   .cat-head {
     display: flex;
@@ -142,76 +188,73 @@ const cats = categorias.map((c, i) => ({
     justify-content: space-between;
     gap: 24px;
     flex-wrap: wrap;
-    margin-bottom: 8px;
+    margin-bottom: 30px;
   }
   .cat-head h2 {
-    margin-top: 14px;
-    font-weight: 300;
-    font-size: clamp(28px, 4vw, 46px);
-    letter-spacing: -0.02em;
+    margin-top: 16px;
+    font-size: clamp(34px, 4.4vw, 54px);
   }
-  .cat-head-nota {
-    font-size: 13px;
-    color: var(--ink-mute);
-    max-width: 280px;
-    line-height: 1.6;
+  .cat-head-meta {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
   }
-  .cat-lista {
-    margin-top: 30px;
-    border-top: 1px solid var(--line-2);
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
   }
-  .cat-row {
+  .cat-card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    padding: 24px 22px;
+    min-height: 158px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--ink);
+    transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+  }
+  .cat-card:hover {
+    border-color: var(--ink);
+    transform: translateY(-3px);
+  }
+  .cat-card-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
-    padding: clamp(18px, 2.4vw, 26px) clamp(8px, 1.5vw, 18px);
-    border-bottom: 1px solid var(--line-2);
-    color: var(--ink);
-    transition: padding-left 0.3s var(--ease), background 0.3s var(--ease);
   }
-  .cat-row:hover {
-    padding-left: 26px;
-    background: rgba(255, 255, 255, 0.6);
-  }
-  .cat-row-left {
-    display: flex;
-    align-items: baseline;
-    gap: clamp(16px, 2.5vw, 34px);
-    min-width: 0;
-  }
-  .cat-num {
+  .cat-card-num {
     font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    color: var(--ink-faint-2);
-    flex: none;
-  }
-  .cat-nombre {
-    font-weight: 300;
-    font-size: clamp(24px, 3.4vw, 42px);
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-  }
-  .cat-row-right {
-    display: flex;
-    align-items: center;
-    gap: clamp(16px, 2vw, 28px);
-    flex: none;
-  }
-  .cat-count {
-    font-size: 11.5px;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0.06em;
-    color: var(--ink-mute);
-    text-transform: uppercase;
+    color: var(--ink-faint-2);
   }
-  .cat-flecha {
-    font-size: 22px;
+  .cat-card-arrow {
+    font-size: 18px;
+  }
+  .cat-card-nombre {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 30px;
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+  }
+  .cat-card-count {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 9px;
   }
 
   @media (max-width: 820px) {
-    .hero {
+    .hero-inner {
       grid-template-columns: 1fr;
     }
     .hero-foto {

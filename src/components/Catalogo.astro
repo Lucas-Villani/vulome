@@ -8,7 +8,7 @@ const { productos, categorias } = Astro.props;
   <div class="catalogo-head">
     <div>
       <p class="eyebrow">Nuestra selección</p>
-      <h2>Catálogo <span class="cuenta">· {productos.length} productos</span></h2>
+      <h2>Catálogo <span class="cuenta">/ {productos.length} productos</span></h2>
     </div>
     <label class="search">
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
@@ -34,7 +34,7 @@ const { productos, categorias } = Astro.props;
 
 <style>
   .catalogo {
-    padding-block: clamp(40px, 5vw, 68px) clamp(64px, 8vw, 110px);
+    padding-block: clamp(36px, 4vw, 60px) clamp(64px, 8vw, 110px);
   }
   .catalogo-head {
     display: flex;
@@ -42,19 +42,19 @@ const { productos, categorias } = Astro.props;
     justify-content: space-between;
     gap: 24px;
     flex-wrap: wrap;
-    margin-bottom: 30px;
+    margin-bottom: 28px;
   }
   .catalogo-head h2 {
-    margin-top: 14px;
-    font-weight: 300;
-    font-size: clamp(28px, 4vw, 46px);
-    letter-spacing: -0.02em;
+    margin-top: 16px;
+    font-size: clamp(34px, 4.4vw, 54px);
   }
   .cuenta {
-    font-size: 0.42em;
+    font-family: var(--font);
+    font-size: 0.32em;
     font-weight: 500;
-    color: var(--ink-mute);
-    letter-spacing: 0;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     vertical-align: middle;
   }
   .search {
@@ -63,7 +63,7 @@ const { productos, categorias } = Astro.props;
     gap: 0.5rem;
     padding: 0.7rem 1.1rem;
     border: 1px solid var(--line-2);
-    border-radius: 999px;
+    border-radius: 6px;
     color: var(--ink-mute);
     transition: border-color 0.2s, color 0.2s;
     min-width: 230px;
@@ -81,16 +81,16 @@ const { productos, categorias } = Astro.props;
   }
   .filtros {
     display: flex;
-    gap: 10px;
+    gap: 9px;
     flex-wrap: wrap;
-    margin-bottom: 40px;
+    margin-bottom: 38px;
   }
   .filtro {
     font-size: 12.5px;
-    font-weight: 600;
-    letter-spacing: 0.03em;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     padding: 11px 20px;
-    border-radius: 999px;
+    border-radius: 6px;
     cursor: pointer;
     white-space: nowrap;
     background: transparent;
@@ -163,9 +163,7 @@ const { productos, categorias } = Astro.props;
     );
     buscador?.addEventListener("input", aplicar);
 
-    // Las filas de categoría de la home activan el filtro correspondiente
-    // (y el enlace #catalogo hace el scroll hasta acá).
-    document.querySelectorAll(".cat-row").forEach((row) => {
+    document.querySelectorAll(".cat-card").forEach((row) => {
       row.addEventListener("click", () => {
         const c = row.getAttribute("data-cat");
         const btn = filtros.find((b) => b.getAttribute("data-filtro") === c);

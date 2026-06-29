@@ -34,7 +34,10 @@ const relacionados = productos
   .slice(0, 3);
 const precioCard = (p: (typeof productos)[number]) => {
   const ms = (p.medidas ?? []).filter((m) => m && m.medida && m.precio);
-  return ms.length ? `desde ${formatearPrecio(Math.min(...ms.map((m) => m.precio)))}` : formatearPrecio(p.precio);
+  if (!ms.length) return formatearPrecio(p.precio);
+  const mn = Math.min(...ms.map((m) => m.precio));
+  const mx = Math.max(...ms.map((m) => m.precio));
+  return mn === mx ? formatearPrecio(mn) : `${formatearPrecio(mn)} – ${formatearPrecio(mx)}`;
 };
 ---
 
@@ -303,7 +306,7 @@ const precioCard = (p: (typeof productos)[number]) => {
     font-weight: 600;
     letter-spacing: 0.03em;
     padding: 12px 20px;
-    border-radius: 999px;
+    border-radius: 6px;
     cursor: pointer;
     background: transparent;
     color: var(--ink);
@@ -327,7 +330,7 @@ const precioCard = (p: (typeof productos)[number]) => {
     font-weight: 600;
     letter-spacing: 0.03em;
     padding: 19px 30px;
-    border-radius: 999px;
+    border-radius: 8px;
     max-width: 420px;
     transition: opacity 0.2s;
   }
@@ -439,9 +442,11 @@ const precioCard = (p: (typeof productos)[number]) => {
     color: var(--ink-faint);
   }
   .rel-nombre {
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: -0.01em;
+    font-family: var(--font-serif);
+    font-size: 19px;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    line-height: 1.15;
     margin-top: 14px;
   }
   .rel-precio {

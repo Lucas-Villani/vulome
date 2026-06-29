@@ -1,31 +1,34 @@
 /* ===========================================================
    VULOME — estilos globales
-   Paleta cálida (crema / beige / negro cálido). Editorial, minimalista.
+   Editorial cálido: Instrument Serif (títulos) + Space Grotesk (cuerpo).
    =========================================================== */
 
 :root {
-  --bg: #f6f4f0;
+  --bg: #f5f3ef;
   --surface: #ece8e1;
   --surface-2: #efece6;
-  --ink: #14110f;
+  --ink: #15120f;
   --ink-soft: #6f6960;
-  --ink-mute: #807a71;
-  --ink-faint: #aaa298;
-  --ink-faint-2: #bcb4a9;
-  --line: #e6e2db;
-  --line-2: #e1dcd3;
-  --accent: #14110f;
+  --ink-mute: #7a746a;
+  --ink-faint: #a39d93;
+  --ink-faint-2: #b3aca1;
+  --line: #e4e0d8;
+  --line-2: #ddd8cf;
+  --accent: #15120f;
   --accent-ink: #ffffff;
+  --hero-bg: #15120f;
+  --hero-surface: #211c17;
 
-  --radius: 4px;
-  --radius-sm: 2px;
+  --radius: 8px;
+  --radius-sm: 4px;
   --maxw: 1340px;
   --pad: clamp(20px, 5vw, 64px);
 
-  --font: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  --font-titulo: "Montserrat", sans-serif;
+  --font: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-titulo: var(--font-serif);
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
-  --shadow: 0 24px 50px rgba(20, 17, 15, 0.1);
+  --shadow: 0 24px 50px rgba(21, 18, 15, 0.1);
 }
 
 /* ===== Reset ===== */
@@ -68,16 +71,20 @@ h1,
 h2,
 h3,
 h4 {
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  font-weight: 300;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+}
+.italic {
+  font-style: italic;
 }
 ::selection {
   background: var(--ink);
   color: #fff;
 }
 
-/* ===== Utilidades de layout ===== */
+/* ===== Utilidades ===== */
 .container {
   width: 100%;
   max-width: var(--maxw);
@@ -90,8 +97,8 @@ h4 {
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.26em;
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.7rem;
+  font-weight: 500;
   color: var(--ink-faint);
 }
 .section-head {
@@ -99,16 +106,11 @@ h4 {
   align-items: flex-end;
   justify-content: space-between;
   gap: 1.5rem;
-  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
   flex-wrap: wrap;
 }
 .section-head h2 {
-  font-size: clamp(1.8rem, 4vw, 2.9rem);
-  font-weight: 300;
-}
-.section-head p {
-  color: var(--ink-mute);
-  font-size: 0.9rem;
+  font-size: clamp(34px, 4.4vw, 54px);
 }
 
 /* ===== Botones ===== */
@@ -117,11 +119,11 @@ h4 {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.95rem 1.9rem;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 0.82rem;
-  letter-spacing: 0.04em;
+  padding: 15px 30px;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.03em;
   cursor: pointer;
   transition: transform 0.25s var(--ease), background 0.25s, border-color 0.25s, opacity 0.25s;
 }
@@ -131,7 +133,7 @@ h4 {
   border: 1px solid var(--accent);
 }
 .btn-primary:hover {
-  opacity: 0.82;
+  opacity: 0.85;
 }
 .btn-ghost {
   background: transparent;
@@ -142,14 +144,12 @@ h4 {
   border-color: var(--ink);
 }
 
-/* ===== Grilla de productos (compartida) ===== */
+/* ===== Grilla de productos ===== */
 .grid-productos {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: clamp(2rem, 3.5vw, 3.4rem) clamp(1.4rem, 2.5vw, 2.25rem);
+  gap: clamp(2rem, 3.5vw, 2.75rem) clamp(1.4rem, 2.5vw, 1.9rem);
 }
-
-/* El filtro y el buscador del catálogo ocultan tarjetas con esta clase. */
 .card.is-hidden {
   display: none !important;
 }

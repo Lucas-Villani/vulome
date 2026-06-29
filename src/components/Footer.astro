@@ -6,14 +6,18 @@ const anio = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="footer-inner container">
-    <span class="footer-logo">{sitio.nombre}</span>
+    <span class="footer-logo">
+      <span class="footer-v">V</span>
+      <span class="footer-sep"></span>
+      <span class="footer-txt">{sitio.nombre}</span>
+    </span>
     <span class="footer-meta">{sitio.tagline} · Catálogo {anio}</span>
   </div>
 </footer>
 
 <style>
   .site-footer {
-    background: #14110f;
+    background: var(--hero-bg);
     color: #837d73;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
@@ -26,11 +30,26 @@ const anio = new Date().getFullYear();
     padding-block: 30px;
   }
   .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     color: #fff;
-    font-weight: 600;
-    letter-spacing: 0.42em;
-    font-size: 14px;
-    padding-left: 0.42em;
+  }
+  .footer-v {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    line-height: 0.7;
+  }
+  .footer-sep {
+    width: 1px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.22);
+  }
+  .footer-txt {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.34em;
+    padding-left: 0.34em;
   }
   .footer-meta {
     font-size: 12px;
