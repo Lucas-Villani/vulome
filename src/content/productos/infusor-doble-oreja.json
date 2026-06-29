@@ -3,6 +3,8 @@
   "categoria": "Infusores",
   "precio": 5999,
   "descripcion": "Infusor metálico doble oreja, ideal para preparar té en hebras, hierbas e infusiones de forma práctica y reutilizable. Su diseño permite apoyarlo cómodamente sobre la taza, facilitando la preparación sin que el infusor se hunda por completo.\n\nEs fácil de cargar, usar y limpiar, una opción duradera y prolija para disfrutar infusiones todos los días.",
+  "material": "Acero Inoxidable",
+  "incluye": "1 infusor",
   "imagenes": [
     "/images/productos/1-9.webp",
     "/images/productos/2-9.webp",
