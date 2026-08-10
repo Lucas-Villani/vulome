@@ -20,5 +20,7 @@
     "/images/productos/8-1.webp",
     "/images/productos/9-1.webp"
   ],
-  "destacado": false
+  "destacado": false,
+  "agotado": true,
+  "oculto": false
 }
