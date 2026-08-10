@@ -57,6 +57,12 @@ content:
       - name: destacado
         label: Destacado (resaltar el producto)
         type: boolean
+      - name: agotado
+        label: Agotado (sin stock — se muestra en gris y sin botón de WhatsApp)
+        type: boolean
+      - name: oculto
+        label: Ocultar del catálogo (no se muestra en la web; se puede reactivar cuando quieras)
+        type: boolean
 
   - name: categorias
     label: Categorías

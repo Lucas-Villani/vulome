@@ -22,11 +22,12 @@ if (tieneMedidas) {
 ---
 
 <div
-  class="card"
+  class:list={["card", { "is-agotado": producto.agotado }]}
   data-categoria={producto.categoria}
   data-nombre={producto.nombre.toLowerCase()}
 >
   <div class="thumb">
+    {producto.agotado && <span class="badge-agotado">Agotado</span>}
     {multiple ? (
       <div class="carousel" data-count={fotos.length}>
         <div class="carousel-track">
@@ -131,6 +132,31 @@ if (tieneMedidas) {
   .thumb-ph {
     font-family: var(--font-serif);
     font-size: 3rem;
+    color: var(--ink-faint);
+  }
+
+  /* Estado agotado: foto en gris + cartel. El cartel no bloquea el click. */
+  .badge-agotado {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 5;
+    pointer-events: none;
+    background: rgba(20, 17, 15, 0.85);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 6px 11px;
+    border-radius: 4px;
+  }
+  .card.is-agotado .thumb .single,
+  .card.is-agotado .slide img {
+    filter: grayscale(1);
+    opacity: 0.6;
+  }
+  .card.is-agotado .precio {
     color: var(--ink-faint);
   }
 

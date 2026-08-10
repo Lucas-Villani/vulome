@@ -19,6 +19,8 @@ export interface Producto {
   descripcion: string;
   imagenes: string[];
   destacado: boolean;
+  agotado: boolean;
+  oculto: boolean;
   material: string;
   incluye: string;
   medidas: Medida[];
@@ -42,6 +44,8 @@ export const productos: Producto[] = Object.entries(modules)
       descripcion: data.descripcion,
       imagenes,
       destacado: data.destacado ?? false,
+      agotado: data.agotado ?? false,
+      oculto: data.oculto ?? false,
       material: data.material ?? "",
       incluye: data.incluye ?? "",
       medidas: Array.isArray(data.medidas)
@@ -49,4 +53,8 @@ export const productos: Producto[] = Object.entries(modules)
         : [],
     };
   })
+  // Los productos "ocultos" no se muestran en ningún lado (ni tarjeta, ni
+  // página, ni conteo de categoría). El archivo queda: basta desactivar el
+  // toggle para que reaparezca.
+  .filter((p) => !p.oculto)
   .sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));

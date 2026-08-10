@@ -10,8 +10,8 @@ import { productos } from "../lib/productos";
 const wa = linkWhatsapp(sitio.whatsapp, `¡Hola ${sitio.nombre}! Quería hacer una consulta 😊`);
 
 const destacado =
-  productos.find((p) => p.destacado && p.imagenes.length > 0) ??
-  productos.find((p) => p.imagenes.length > 0);
+  productos.find((p) => p.destacado && !p.agotado && p.imagenes.length > 0) ??
+  productos.find((p) => !p.agotado && p.imagenes.length > 0);
 const heroImg = destacado?.imagenes[0];
 
 const pad = (n: number) => (n < 10 ? "0" + n : "" + n);
