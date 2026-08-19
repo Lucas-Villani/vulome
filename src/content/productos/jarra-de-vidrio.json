@@ -1,6 +1,6 @@
 {
   "nombre": "Jarra de Vidrio",
-  "categoria": "Infusores",
+  "categoria": "Hogar & Cocina",
   "precio": 27999,
   "medidas": [
     {
@@ -21,5 +21,7 @@
     "/images/productos/7-14.webp",
     "/images/productos/8-4.webp"
   ],
-  "destacado": false
+  "destacado": false,
+  "agotado": false,
+  "oculto": false
 }
