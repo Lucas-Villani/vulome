@@ -1,0 +1,20 @@
+{
+  "nombre": "Set de 3 Tablas de Bambú con canaleta y manija",
+  "categoria": "Hogar & Cocina",
+  "precio": 30000,
+  "descripcion": "Un set práctico y versátil para acompañar distintas preparaciones en la cocina. Incluye 3 tablas de bambú en formato rectangular, ideales para cortar, picar y organizar diferentes alimentos de forma cómoda, sumando una estética cálida y natural a tu espacio.\n\nCada tabla cuenta con canaleta para ayudar a contener líquidos y jugos durante el corte y manija integrada para facilitar su manipulación, traslado y guardado. Una opción funcional para tener distintas superficies de trabajo disponibles según cada preparación.",
+  "material": "Madera de bambu",
+  "incluye": "3 tablas de bambú",
+  "imagenes": [
+    "/images/productos/1-2.png",
+    "/images/productos/2-2.png",
+    "/images/productos/3-2.png",
+    "/images/productos/4-2.png",
+    "/images/productos/5-2.png",
+    "/images/productos/6-2.png",
+    "/images/productos/7.png"
+  ],
+  "destacado": false,
+  "agotado": false,
+  "oculto": false
+}
