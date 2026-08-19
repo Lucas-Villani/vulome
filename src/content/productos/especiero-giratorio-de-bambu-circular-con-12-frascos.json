@@ -1,0 +1,19 @@
+{
+  "nombre": "Especiero giratorio de bambú circular con 12 frascos",
+  "categoria": "Hogar & Cocina",
+  "precio": 27000,
+  "descripcion": "Organizá tus condimentos de forma práctica y con estilo con este especiero giratorio de bambú, pensado para mantener tus especias ordenadas, visibles y siempre al alcance mientras cocinás.\n\nIncluye 12 frascos de vidrio de 120 ml y cuenta con un diseño compacto ideal para aprovechar mejor el espacio de la mesada, aportando además un toque cálido y natural a tu cocina.",
+  "material": "Madera de bambú",
+  "incluye": "Especiero giratorio + 12 frascos de vidrio",
+  "imagenes": [
+    "/images/productos/1-1.png",
+    "/images/productos/2-1.png",
+    "/images/productos/3-1.png",
+    "/images/productos/4-1.png",
+    "/images/productos/5-1.png",
+    "/images/productos/6-1.png"
+  ],
+  "destacado": false,
+  "agotado": false,
+  "oculto": false
+}
