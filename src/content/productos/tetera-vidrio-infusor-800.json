@@ -25,6 +25,6 @@
     "/images/productos/7.webp"
   ],
   "destacado": false,
-  "agotado": true,
+  "agotado": false,
   "oculto": false
 }
