@@ -1,0 +1,19 @@
+{
+  "nombre": "Frascos especieros x12u.",
+  "categoria": "Hogar & Cocina",
+  "precio": 23000,
+  "descripcion": "Set de 12 frascos especieros Vulome, ideal para mantener tus condimentos organizados, visibles y siempre al alcance. Su combinación de vidrio y tapas de madera de bambú aporta una estética cálida y elegante, perfecta para sumar orden y diseño a tu cocina.\n\nUna opción práctica y decorativa para almacenar especias, hierbas y condimentos de uso diario.",
+  "material": "Madera de bambu + Vidrio",
+  "incluye": "12 Frascos especieros + Etiquetas + Marcador + Embudo",
+  "imagenes": [
+    "/images/productos/1-3.png",
+    "/images/productos/2-3.png",
+    "/images/productos/3-3.png",
+    "/images/productos/4-3.png",
+    "/images/productos/5-3.png",
+    "/images/productos/6-3.png"
+  ],
+  "destacado": false,
+  "agotado": false,
+  "oculto": false
+}
