@@ -24,8 +24,10 @@
     "/images/productos/3-3.webp",
     "/images/productos/4-3.webp",
     "/images/productos/5-3.webp",
-    "/images/productos/6-3.webp",
+    "/images/productos/6-4.png",
     "/images/productos/7-3.webp"
   ],
-  "destacado": false
+  "destacado": false,
+  "agotado": false,
+  "oculto": false
 }
