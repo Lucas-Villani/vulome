@@ -1,0 +1,19 @@
+{
+  "nombre": "Set x2 Bandejas de Bambú con Asas Metálicas",
+  "categoria": "Hogar & Cocina",
+  "precio": 26000,
+  "descripcion": "Set de 2 bandejas VULOME fabricadas en bambú con asas metálicas. Su diseño moderno y versátil es ideal para servir desayunos, comidas y bebidas, o para organizar y decorar distintos espacios del hogar.\n\nMedidas:\n\n* Grande: 41 x 29 x 5 cm.\n* Chica: 27 x 27 x 5 cm.\n\nSon apilables, prácticas y fáciles de guardar.",
+  "material": "Madera de bambú",
+  "incluye": "Set de 2 bandejas",
+  "imagenes": [
+    "/images/productos/1-4.png",
+    "/images/productos/2-4.png",
+    "/images/productos/3-4.png",
+    "/images/productos/4-4.png",
+    "/images/productos/5-4.png",
+    "/images/productos/6-5.png"
+  ],
+  "destacado": false,
+  "agotado": false,
+  "oculto": false
+}
